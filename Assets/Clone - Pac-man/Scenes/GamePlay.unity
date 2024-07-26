@@ -4532,6 +4532,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129888271}
   m_CullTransparentMesh: 1
+--- !u!1 &266325488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 266325489}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Respawn
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &266325489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266325488}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.45, y: -6.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402460792
 GameObject:
   m_ObjectHideFlags: 0
@@ -4769,6 +4800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc81f1e5e06df2c4ebc5615eff5aeb77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreText: {fileID: 129888273}
 --- !u!114 &1022857142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4881,6 +4913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea2614b857a5bb4fb1be100e203896d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 7616999389809406231}
+  _gameView: {fileID: 1022857141}
+  _spawn: {fileID: 266325489}
 --- !u!4 &2071791392
 Transform:
   m_ObjectHideFlags: 0
@@ -4975,7 +5010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2634957448043628033, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.051207155
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2634957448043628033, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5012,6 +5047,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2176398971566626380, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7616999389809406230}
+    - targetCorrespondingSourceObject: {fileID: 2176398971566626380, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7616999389809406231}
   m_SourcePrefab: {fileID: 100100000, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
 --- !u!1 &7616999389809406229 stripped
 GameObject:
@@ -5042,12 +5080,41 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7616999389809406229}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: de2f7fe3-070c-400c-bc72-47b710ec2815
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7616999389809406231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7616999389809406229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ce35c2c5e77e0459c38998c68e4d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 600
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5059,3 +5126,4 @@ SceneRoots:
   - {fileID: 402460795}
   - {fileID: 1231505296365448045}
   - {fileID: 7616999389809406228}
+  - {fileID: 266325489}
