@@ -23,4 +23,9 @@ public class PauseMenuView : MonoBehaviour
 	private void Resume()
 	{
 	}
+
+	public void Restart()
+	{
+
+	}
 }
