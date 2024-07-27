@@ -29,6 +29,6 @@ public class PauseMenuView : MonoBehaviour
 
 	public void Restart()
 	{
-		_gameController.SwitchState(_gameController.GameResetState);
+		SceneManager.LoadScene(1);
 	}
 }

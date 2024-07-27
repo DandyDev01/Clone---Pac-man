@@ -10,17 +10,17 @@ public class GameResetState : GameStateBase
 
 	public override void EnterStart()
 	{
-		throw new System.NotImplementedException();
+		Debug.Log("Enter Game Reset");
 	}
 
 	public override void ExitStart()
 	{
-		throw new System.NotImplementedException();
+		Debug.Log("Exit Game Reset");
 	}
 
 	public override GameStateBase RunState()
 	{
-		throw new System.NotImplementedException();
+		return _gameController.GameRunState;
 	}
 
 	protected override GameStateBase CheckForStateSwitch()
