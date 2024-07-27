@@ -4,7 +4,15 @@ using UnityEngine;
 
 public abstract class GhostStateBase : MonoBehaviour
 {
-    protected abstract void ChooseTargetLocation();
+    protected Vector2 _targetPosition;
+    protected Transform _playerTransform;
+
+	private void Awake()
+	{
+        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+	}
+
+	protected abstract void ChooseTargetLocation();
 
     public abstract void EnterState();
 

@@ -26,6 +26,6 @@ public class RedGhostChaseState : GhostStateBase
 
 	protected override void ChooseTargetLocation()
 	{
-		throw new System.NotImplementedException();
+		_targetPosition = _playerTransform.position;
 	}
 }
