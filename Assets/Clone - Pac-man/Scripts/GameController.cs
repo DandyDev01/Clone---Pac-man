@@ -7,24 +7,50 @@ using UnityEngine.InputSystem;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private GameView _gameView;
     [SerializeField] private Transform _spawn;
 
-	private PlayerInput _input;
+	[Header("UI")]
+    [SerializeField] private GameView _gameView;
+    [SerializeField] private PauseMenuView _pauseView;
+    [SerializeField] private PauseMenuView _gameOverView;
 
-	private int _maxLives;
-    private int _remainingLives;
+	public PlayerInput Input { get; private set; }
+
+	public GameStateBase CurrentState { get; private set; }
+	public GameStateBase GameRunState { get; private set; }
+	public GameStateBase GamePauseState { get; private set; }
+	public GameStateBase GameResetState { get; private set; }
+	public GameStateBase GameOverState { get; private set; }
+
+	private int _maxLives = 3;
+    private int _remainingLives = 3;
     private int _score;
 
+	public GameView GameView => _gameView;
+	public PauseMenuView PauseView => _pauseView;
+	public PauseMenuView GameOverView => _gameOverView;
+	public Player Player => _player;
+
     public int Score => _score;
+	public int RemainingLives => _remainingLives;
 
 	private void Awake()
 	{
-		_input = GetComponent<PlayerInput>();
+		_gameOverView.gameObject.SetActive(false);
+		_pauseView.gameObject.SetActive(false);
+
+		GameRunState = new GameRunState(this);
+		GamePauseState = new GamePauseState(this);
+		GameResetState = new GameResetState(this);
+		GameOverState = new GameOverState(this);
+
+		CurrentState = GameRunState;
+
+		Input = Player.GetComponent<PlayerInput>();
 	}
 
 	// Start is called before the first frame update
-	void Start()
+	private void Start()
     {
 		_player.OnDealth += HandleDeath;
         _player.OnPickup += AddToScore;
@@ -33,7 +59,11 @@ public class GameController : MonoBehaviour
 
 	private void Update()
 	{
-		_player.Move(_input.currentActionMap.actions[0].ReadValue<Vector2>());
+		GameStateBase nextState = CurrentState.RunState();
+		if (nextState != CurrentState)
+		{
+			SwitchState(nextState);
+		}
 	}
 
 	private void HandleDeath()
@@ -55,4 +85,10 @@ public class GameController : MonoBehaviour
 		_gameView.UpdateScore(_score);
 	}
 
+	internal void SwitchState(GameStateBase newState)
+	{
+		CurrentState.ExitStart();
+		CurrentState = newState;
+		CurrentState.EnterStart();
+	}
 }

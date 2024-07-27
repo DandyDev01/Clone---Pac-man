@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class GamePauseState : GameStateBase
 {
+	public GamePauseState(GameController gameController) : base(gameController)
+	{
+	}
+
 	public override void EnterStart()
 	{
-		throw new System.NotImplementedException();
+		_gameController.PauseView.gameObject.SetActive(true);
 	}
 
 	public override void ExitStart()
 	{
-		throw new System.NotImplementedException();
+		_gameController.PauseView.gameObject.SetActive(false);
 	}
 
 	public override GameStateBase RunState()
 	{
-		throw new System.NotImplementedException();
+		if (_gameController.Input.currentActionMap.actions[1].ReadValue<float>() > 0)
+		{
+			return _gameController.GameRunState;
+		}
+
+		return this;
 	}
 
 	protected override GameStateBase CheckForStateSwitch()

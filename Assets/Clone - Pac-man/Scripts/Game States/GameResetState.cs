@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameResetState : GameStateBase
 {
+	public GameResetState(GameController gameController) : base(gameController)
+	{
+	}
+
 	public override void EnterStart()
 	{
 		throw new System.NotImplementedException();

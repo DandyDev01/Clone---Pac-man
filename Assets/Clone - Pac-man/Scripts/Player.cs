@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public Action OnDealth;
 	public Action<int> OnPickup;
 
+	public bool HasBeenHit { get; set; }
+
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();   
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
 	{
 		if (collision.transform.tag == "Ghost")
 		{
+			HasBeenHit = true;
 			OnDealth?.Invoke();
 		}
 	}

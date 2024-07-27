@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class GameOverState : GameStateBase
 {
+	public GameOverState(GameController gameController) : base(gameController)
+	{
+	}
+
 	public override void EnterStart()
 	{
-		throw new System.NotImplementedException();
+		_gameController.GameOverView.gameObject.SetActive(true);
 	}
 
 	public override void ExitStart()
 	{
-		throw new System.NotImplementedException();
+		_gameController.GameOverView.gameObject.SetActive(false);
 	}
 
 	public override GameStateBase RunState()
 	{
-		throw new System.NotImplementedException();
+		return this;
 	}
 
 	protected override GameStateBase CheckForStateSwitch()
