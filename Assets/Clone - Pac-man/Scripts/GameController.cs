@@ -64,13 +64,8 @@ public class GameController : MonoBehaviour
 		_player.OnDealth += HandleDeath;
         _player.OnPickup += AddToScore;
         _player.transform.position = _spawn.position;
-    
-		_pelletGenerator.OnAllPelletPickedup += Win
-	}
 
-	private void Win()
-	{
-		SwitchState(_winState);
+		_pelletGenerator.OnAllPelletPickedup += Win;
 	}
 
 	private void Update()
@@ -80,6 +75,11 @@ public class GameController : MonoBehaviour
 		{
 			SwitchState(nextState);
 		}
+	}
+
+	private void Win()
+	{
+		SwitchState(GameWinState);
 	}
 
 	private void HandleDeath()

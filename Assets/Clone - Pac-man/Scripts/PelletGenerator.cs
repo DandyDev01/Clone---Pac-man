@@ -39,7 +39,12 @@ public class PelletGenerator : MonoBehaviour
 				if (tile is null)
 				{
 					worldPos = gridLayout.CellToWorld(new Vector3Int((int)worldPos.x, (int)worldPos.y));
+
+					if (_grid.Grid.IsInRange(worldPos) == false)
+						continue;
+
 					Pellet p = Instantiate(_pelletPrefab, worldPos + (Vector3.one / 2), Quaternion.identity);
+					p.transform.parent = transform;
 					p.OnPickup += Deactiate;
 					
 					_activePellets.Add(p);
