@@ -31,4 +31,9 @@ public class PauseMenuView : MonoBehaviour
 	{
 		SceneManager.LoadScene(1);
 	}
+
+	public void SetGameController(GameController gameController)
+	{
+		_gameController = gameController;
+	}
 }

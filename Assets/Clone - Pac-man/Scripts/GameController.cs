@@ -8,11 +8,13 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private Transform _spawn;
+	[SerializeField] private PelletGenerator _pelletGenerator;
 
 	[Header("UI")]
     [SerializeField] private GameView _gameView;
     [SerializeField] private PauseMenuView _pauseView;
     [SerializeField] private PauseMenuView _gameOverView;
+    [SerializeField] private PauseMenuView _winView;
 
 	public PlayerInput Input { get; private set; }
 
@@ -21,6 +23,7 @@ public class GameController : MonoBehaviour
 	public GameStateBase GamePauseState { get; private set; }
 	public GameStateBase GameResetState { get; private set; }
 	public GameStateBase GameOverState { get; private set; }
+	public GameStateBase GameWinState{ get; private set; }
 
 	private int _maxLives = 3;
     private int _remainingLives = 3;
@@ -29,7 +32,10 @@ public class GameController : MonoBehaviour
 	public GameView GameView => _gameView;
 	public PauseMenuView PauseView => _pauseView;
 	public PauseMenuView GameOverView => _gameOverView;
+	public PauseMenuView WinView => _winView;
+
 	public Player Player => _player;
+	public PelletGenerator PelletGenerator => _pelletGenerator;
 
     public int Score => _score;
 	public int RemainingLives => _remainingLives;
@@ -43,10 +49,13 @@ public class GameController : MonoBehaviour
 		GamePauseState = new GamePauseState(this);
 		GameResetState = new GameResetState(this);
 		GameOverState = new GameOverState(this);
+		GameWinState = new GameWinState(this);
 
 		CurrentState = GameRunState;
 
 		Input = Player.GetComponent<PlayerInput>();
+
+		_pauseView.SetGameController(this);
 	}
 
 	// Start is called before the first frame update
@@ -55,7 +64,14 @@ public class GameController : MonoBehaviour
 		_player.OnDealth += HandleDeath;
         _player.OnPickup += AddToScore;
         _player.transform.position = _spawn.position;
-    }
+    
+		_pelletGenerator.OnAllPelletPickedup += Win
+	}
+
+	private void Win()
+	{
+		SwitchState(_winState);
+	}
 
 	private void Update()
 	{

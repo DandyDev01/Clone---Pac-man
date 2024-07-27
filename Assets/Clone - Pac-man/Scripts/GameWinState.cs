@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameResetState : GameStateBase
+public class GameWinState : GameStateBase
 {
-	public GameResetState(GameController gameController) : base(gameController)
+	public GameWinState(GameController gameController) : base(gameController)
 	{
 	}
 
 	public override void EnterStart()
 	{
-		Debug.Log("Enter Game Reset");
-		_gameController.PelletGenerator.Reset();
+		_gameController.WinView.gameObject.SetActive(true);
+		Debug.Log("Enter Win");
 	}
 
 	public override void ExitStart()
 	{
-		Debug.Log("Exit Game Reset");
+		_gameController.WinView.gameObject.SetActive(false);
+		Debug.Log("Exit Win");
 	}
 
 	public override GameStateBase RunState()
 	{
-		return _gameController.GameRunState;
+		return this;
 	}
 
 	protected override GameStateBase CheckForStateSwitch()
