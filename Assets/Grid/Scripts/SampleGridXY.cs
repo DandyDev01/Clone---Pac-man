@@ -23,9 +23,6 @@ namespace Grid
 		[SerializeField] private Transform s;
 		[SerializeField] private Transform t;
 
-
-		private List<GameObject> _markers;
-
 		private GridXY<bool> grid;
 
 		public int Columns { get { return columns; } }
@@ -38,7 +35,6 @@ namespace Grid
 		public void Awake()
 		{
 			grid = new GridXY<bool>(oragin, columns, Rows, CellSize);
-			_markers = new List<GameObject>();
 			SetTraversableValues();
 		}
 
@@ -47,6 +43,9 @@ namespace Grid
 			return grid.GetWorldPosition(col, row);
 		}
 
+		/// <summary>
+		/// Scan the grid for obsticals and mark their cells as not traversable.
+		/// </summary>
 		public void SetTraversableValues()
 		{
 			_tilemap.CompressBounds();
@@ -73,58 +72,59 @@ namespace Grid
 			}
 		}
 
+		/// <summary>
+		/// Find a path from the start location to the target location.
+		/// </summary>
+		/// <param name="target">Where the goal is.</param>
+		/// <param name="start">Where the starting localtion is (initial state.)</param>
+		/// <returns>A path from the start location to target location</returns>
 		public List<Node> CalculatePath(Vector2 target, Vector2 start)
 		{
+			// normalize the start location to grid coords (alignment)
+			start = grid.GetCellPosition(start);
+			start = grid.GetWorldPosition((int)start.x, (int)start.y);
+
+			// normalize the target location to the grid coords (alignment)
+			target = grid.GetCellPosition(target);
+			target = grid.GetWorldPosition((int)target.x, (int)target.y);
+
 			Node root = CreateRoot(start);
 			List<Node> nodes = new();
 			bool goalFound = false;
-
-			//if (_markers.Count > 0)
-			//{
-			//	foreach (var marker in _markers)
-			//	{
-			//		Destroy(marker.gameObject);
-			//	}
-
-			//	_markers.Clear();
-			//}
 
 			nodes.Add(root);
 
 			int index = 0;
 			Node current = root;
-			Node goal = null;
 			while (goalFound == false && index < 1300)
 			{
+				// node is not within the bounds of the search space.
 				if (grid.IsInRange(current._worldPosition) == false)
 				{
 					continue;
 				}
 
+				// exit condition, path to goal is found.
 				if (current._worldPosition.Approx((Vector3)target))
 				{
 					goalFound = true;
-					goal = current;
+					break;
 				}
 
 				Vector3[] neighborsWorldPosition = grid.GetNeighboursWorldPositions(current._worldPosition).ToArray();
 
-				List<Vector3> traversable = new();
-
+				// get the neighboring cells of current that are traversable and not already marked.
 				foreach (Vector3 neightbor in neighborsWorldPosition)
 				{
 					Vector3 cell = grid.GetCellPosition(neightbor);
 					bool value = grid.GetElement((int)cell.x, (int)cell.y);
-					if (value)
-						traversable.Add(neightbor);
-				}
+					if (value == false)
+						continue;
 
-				foreach (var item in traversable)
-				{
-					var newNode = new Node(item, current);
-					if (nodes.Where(x => x._worldPosition.Approx(newNode._worldPosition)).Any() == false)
+					var traversableNeighbor = new Node(neightbor, current);
+					if (nodes.Contains(x => x._worldPosition.Approx(traversableNeighbor._worldPosition)) == false)
 					{
-						nodes.Add(newNode);
+						nodes.Add(traversableNeighbor);
 					}
 				}
 
@@ -136,29 +136,39 @@ namespace Grid
 				}
 
 				current = nodes[index];
-
-				//var g = Instantiate(_marker, current._worldPosition, Quaternion.identity);
-				//_markers.Add(g);
 			}
 
+			return BuildPath(root, current);
+		}
+
+		/// <summary>
+		/// build a path from and end node to start node
+		/// </summary>
+		/// <param name="start">the start of the path</param>
+		/// <param name="end">The end of the path</param>
+		/// <returns>path from start to end.</returns>
+		private static List<Node> BuildPath(Node start, Node end)
+		{
 			List<Node> path = new();
 
 			int i = 0;
-			while (current._worldPosition.Approx(root._worldPosition) == false && i < 1300)
+			while (end._worldPosition.Approx(start._worldPosition) == false && i < 1300)
 			{
-				path.Add(current);
-				current = current._parent;
+				path.Add(end);
+				end = end._parent;
 				i++;
 			}
 
 			path.Reverse();
 
-			index = 0;
-			goalFound = false;
-
 			return path;
 		}
 
+		/// <summary>
+		/// Helper method to setup the root node.
+		/// </summary>
+		/// <param name="start">Location of the root node.</param>
+		/// <returns>The root node.</returns>
 		private Node CreateRoot(Vector2 start)
 		{
 			Vector3[] neighborsWorldPosition = grid.GetNeighboursWorldPositions(start).ToArray();
@@ -179,14 +189,11 @@ namespace Grid
 			foreach (var item in root._children)
 			{
 				item._parent = root;
-				Instantiate(_marker, item._worldPosition, Quaternion.identity);
 			}
 
 			return root;
 		}
 	}
-
-	
 
 	public class Node
 	{
@@ -215,7 +222,6 @@ namespace Grid
 		}
 	}
 
-
 	public static class Extensions
 	{
 
@@ -243,6 +249,10 @@ namespace Grid
 		{
 			return collection.Where(p).Any();
 		}
-	}
 
+		public static bool Contains<T>(this List<T> collection, Func<T, bool> p)
+		{
+			return collection.Where(p).Any();
+		}
+	}
 }

@@ -44,18 +44,30 @@ public class Ghost : MonoBehaviour
 
 	private IEnumerator PathUpdater()
 	{
+		List<GameObject> markers = new();
 		while (true)
 		{
-			_path = _grid.CalculatePath(_target.position, transform.position);
+			List<Node> newPath = _grid.CalculatePath(_target.position, transform.position);
+
+			if (newPath.Count > 0)
+				_path = newPath;
 
 			foreach (Node node in _path)
 			{
-				Instantiate(_marker, node._worldPosition, Quaternion.identity);
+				GameObject marker = Instantiate(_marker, node._worldPosition, Quaternion.identity);
+				markers.Add(marker);
 			}
 
 			_index = 0;
 			Debug.Log("update");
 			yield return new WaitForSeconds(1f);
+
+			foreach (var item in markers)
+			{
+				Destroy(item.gameObject);
+			}
+
+			markers.Clear();
 		}
 	}
 }
