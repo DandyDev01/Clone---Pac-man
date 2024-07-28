@@ -63,7 +63,10 @@ public abstract class GhostStateBase : MonoBehaviour
 	public GhostStateBase RunState(Grid.SampleGridXY _grid, Ghost ghost)
 	{
 		if (_index >= _path.Count)
+		{
+			OnTargetReached?.Invoke();
 			return this;
+		}
 
 		_ghost.Move(_currentTarget._worldPosition);
 
@@ -72,13 +75,18 @@ public abstract class GhostStateBase : MonoBehaviour
 			_index += 1;
 
 			if (_index >= _path.Count)
+			{
+				OnTargetReached?.Invoke();
 				return this;
+			}
 
 			_currentTarget = _path[_index];
 		}
 
 		if (ghost.transform.position.Approx(_path[_path.Count - 1]._worldPosition))
+		{
 			OnTargetReached?.Invoke();
+		}
 
 		return this;
 	}

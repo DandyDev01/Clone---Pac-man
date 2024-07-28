@@ -43,5 +43,8 @@ public class ScatterState : GhostStateBase
 		{
 			_path.Add(new Node(item.position));
 		}
+
+		_currentTarget = _path.First();
+		_index = 0;
 	}
 }
