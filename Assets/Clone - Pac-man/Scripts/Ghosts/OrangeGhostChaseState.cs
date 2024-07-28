@@ -24,11 +24,6 @@ public class OrangeGhostChaseState : GhostStateBase
 		throw new System.NotImplementedException();
 	}
 
-	public override GhostStateBase RunState(Grid.SampleGridXY _grid, Ghost ghost)
-	{
-		throw new System.NotImplementedException();
-	}
-
 	protected override Vector3 ChooseTargetLocation()
 	{
 		throw new System.NotImplementedException();

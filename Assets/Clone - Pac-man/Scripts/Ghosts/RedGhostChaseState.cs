@@ -26,27 +26,6 @@ public class RedGhostChaseState : GhostStateBase
 		_ghost.StopCoroutine(PathUpdater());
 	}
 
-	public override GhostStateBase RunState(Grid.SampleGridXY _grid, Ghost ghost)
-	{
-		if (_index >= _path.Count)
-			return this;
-
-		ghost.transform.position = Vector2.MoveTowards(ghost.transform.position, _currentTarget._worldPosition, 
-			ghost.Speed * Time.deltaTime);
-
-		if (ghost.transform.position == _currentTarget._worldPosition)
-		{
-			_index += 1;
-
-			if (_index >= _path.Count)
-				return this;
-
-			_currentTarget = _path[_index];
-		}
-
-		return this;
-	}
-
 	protected override Vector3 ChooseTargetLocation()
 	{
 		return _playerTransform.position;

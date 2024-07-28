@@ -43,4 +43,10 @@ public class Ghost : MonoBehaviour
 			_currentState.EnterState();
 		}
 	}
+
+	public void Move(Vector3 targetPosition)
+	{
+		transform.position = Vector2.MoveTowards(transform.position, targetPosition,
+			Speed * Time.deltaTime);
+	}
 }

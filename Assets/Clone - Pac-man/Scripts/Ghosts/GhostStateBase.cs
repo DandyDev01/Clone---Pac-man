@@ -56,6 +56,26 @@ public abstract class GhostStateBase
 			markers.Clear();
 		}
 	}
+   
+	public GhostStateBase RunState(Grid.SampleGridXY _grid, Ghost ghost)
+	{
+		if (_index >= _path.Count)
+			return this;
+
+		_ghost.Move(_currentTarget._worldPosition);
+
+		if (ghost.transform.position == _currentTarget._worldPosition)
+		{
+			_index += 1;
+
+			if (_index >= _path.Count)
+				return this;
+
+			_currentTarget = _path[_index];
+		}
+
+		return this;
+	}
 
 	protected abstract Vector3 ChooseTargetLocation();
 
@@ -63,7 +83,6 @@ public abstract class GhostStateBase
 
     public abstract void ExitState();
 
-    public abstract GhostStateBase RunState(Grid.SampleGridXY _grid, Ghost ghost);
 
     public abstract GhostStateBase CheckForSwitchState();
 
