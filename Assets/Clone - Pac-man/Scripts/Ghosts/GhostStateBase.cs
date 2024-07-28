@@ -1,4 +1,5 @@
 using Grid;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ public abstract class GhostStateBase : MonoBehaviour
 	protected Ghost _ghost;
 	protected Node _currentTarget;
 	protected int _index = 0;
+
+	public Action OnTargetReached;
 
 	public void Init(SampleGridXY grid, Ghost ghost)
 	{
@@ -73,6 +76,9 @@ public abstract class GhostStateBase : MonoBehaviour
 
 			_currentTarget = _path[_index];
 		}
+
+		if (ghost.transform.position.Approx(_path[_path.Count - 1]._worldPosition))
+			OnTargetReached?.Invoke();
 
 		return this;
 	}

@@ -14,6 +14,7 @@ public class Ghost : MonoBehaviour
 
 	[Header("States")]
 	[SerializeField] private GhostStateBase _chaseState;
+	[SerializeField] private GhostStateBase _scatterState;
 
 	private GhostStateBase _currentState;
 
