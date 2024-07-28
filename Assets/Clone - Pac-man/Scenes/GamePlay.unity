@@ -8329,7 +8329,10 @@ MonoBehaviour:
     its length and the tile it lands in is blues target\n\norange - uses two different
     target modes based on proximity to player. (1) if more than 8 tiles from player,
     use red. (2) if less than 8 tiles from player target is set to his fixed scatter
-    mode "
+    mode \n\n\nfrightened mode - the ghosts choose a direction to mode pseudorandomly
+    at each of the intersections. They turn blue and move a lot slower.\n\nat all
+    the intersections add a trigger collider that will make the ghost update their
+    path"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
