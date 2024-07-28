@@ -22,7 +22,7 @@ public class Ghost : MonoBehaviour
 
 	private void Awake()
 	{
-		_chaseState = new RedGhostChaseState(_grid, this);
+		_chaseState = new PinkGhostChaseState(_grid, this);
 
 		_currentState = _chaseState;
 	}

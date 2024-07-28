@@ -29,7 +29,7 @@ public class OrangeGhostChaseState : GhostStateBase
 		throw new System.NotImplementedException();
 	}
 
-	protected override void ChooseTargetLocation()
+	protected override Vector3 ChooseTargetLocation()
 	{
 		throw new System.NotImplementedException();
 	}

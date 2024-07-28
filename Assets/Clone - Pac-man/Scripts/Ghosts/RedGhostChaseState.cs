@@ -17,6 +17,7 @@ public class RedGhostChaseState : GhostStateBase
 
 	public override void EnterState()
 	{
+		_currentTarget = new Node(_playerTransform.position);
 		 _ghost.StartCoroutine(PathUpdater());
 	}
 
@@ -46,9 +47,9 @@ public class RedGhostChaseState : GhostStateBase
 		return this;
 	}
 
-	protected override void ChooseTargetLocation()
+	protected override Vector3 ChooseTargetLocation()
 	{
-		_currentTarget = new Node(_playerTransform.position);
+		return _playerTransform.position;
 	}
 
 	

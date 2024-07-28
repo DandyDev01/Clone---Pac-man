@@ -26,7 +26,7 @@ public abstract class GhostStateBase
 		List<GameObject> markers = new();
 		while (true)
 		{
-			List<Node> newPath = _grid.CalculatePath(_playerTransform.position, _ghost.transform.position);
+			List<Node> newPath = _grid.CalculatePath(ChooseTargetLocation(), _ghost.transform.position);
 
 			if (newPath.Count > 0)
 			{
@@ -57,7 +57,7 @@ public abstract class GhostStateBase
 		}
 	}
 
-	protected abstract void ChooseTargetLocation();
+	protected abstract Vector3 ChooseTargetLocation();
 
     public abstract void EnterState();
 
