@@ -101,7 +101,7 @@ public abstract class GhostStateBase : MonoBehaviour
 
 		_ghost.Move(_currentTarget._worldPosition);
 
-		if (ghost.transform.position.Approx(_currentTarget._worldPosition))
+		if (Vector3.Distance(_ghost.transform.position, _currentTarget._worldPosition) < 0.05f)
 		{
 			_index += 1;
 
