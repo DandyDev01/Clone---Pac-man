@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FrightenedState : GhostStateBase
 {
+	[SerializeField] private Transform[] _pathUpdateTriggers;
+
+	private Vector3 _lastTarget;
+
 	public override GhostStateBase CheckForSwitchState()
 	{
 		throw new System.NotImplementedException();
@@ -19,7 +23,14 @@ public class FrightenedState : GhostStateBase
 
 	protected override Vector3 ChooseTargetLocation()
 	{
-		// pick a psuedorandom location.
-		return Vector3.zero;
+		Vector3 target = Vector3.zero;
+		do
+		{
+			target = _pathUpdateTriggers[Random.Range(0, _pathUpdateTriggers.Length - 1)].position;
+		}
+		while (target == _lastTarget);
+
+		_lastTarget = target;
+		return target;
 	}
 }

@@ -12,16 +12,21 @@ public class OrangeGhostChaseState : GhostStateBase
 
 	public override void EnterState()
 	{
-		throw new System.NotImplementedException();
 	}
 
 	public override void ExitState()
 	{
-		throw new System.NotImplementedException();
 	}
 
 	protected override Vector3 ChooseTargetLocation()
 	{
-		throw new System.NotImplementedException();
+		float distanceFromPlayer = Vector3.Distance(_playerTransform.position, transform.position);
+		
+		if (distanceFromPlayer > 8f)
+		{
+			return _playerTransform.position;
+		}
+
+		return _ghost.ScatterPoint;
 	}
 }

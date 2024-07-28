@@ -14,13 +14,13 @@ public class Ghost : MonoBehaviour
 
 	[Header("States")]
 	[SerializeField] private GhostStateBase _chaseState;
-	[SerializeField] private GhostStateBase _scatterState;
-	[SerializeField] private GhostStateBase _frightenedState;
+	[SerializeField] private ScatterState _scatterState;
+	[SerializeField] private FrightenedState _frightenedState;
 
 	private GhostStateBase _currentState;
 	private Rigidbody2D _rigidbody;
-	
 
+	public Vector3 ScatterPoint => _scatterState.HomePath.First().position;
 	public GameObject Marker => _marker;
 	public float Speed => _speed;
 	public GhostStateBase CurrentState => _currentState;
@@ -33,7 +33,7 @@ public class Ghost : MonoBehaviour
 		_scatterState.Init(_grid, this);
 		_frightenedState.Init(_grid, this);	
 
-		_currentState = _chaseState;
+		_currentState = _frightenedState;
 
 	}
 

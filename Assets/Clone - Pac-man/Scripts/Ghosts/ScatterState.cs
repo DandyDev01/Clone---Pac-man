@@ -9,6 +9,8 @@ public class ScatterState : GhostStateBase
 {
 	[SerializeField] Transform[] _homePath;
 
+	public Transform[] HomePath => _homePath;
+
 	public override GhostStateBase CheckForSwitchState()
 	{
 		throw new System.NotImplementedException();
