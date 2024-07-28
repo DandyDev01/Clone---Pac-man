@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class GhostStateBase
+public abstract class GhostStateBase : MonoBehaviour
 {
-	protected readonly List<Node> _path;
-	protected readonly Transform _playerTransform;
-	protected readonly SampleGridXY _grid;
-	protected readonly Ghost _ghost;
+	protected List<Node> _path;
+	protected Transform _playerTransform;
+	protected SampleGridXY _grid;
+	protected Ghost _ghost;
 	protected Node _currentTarget;
 	protected int _index = 0;
 
-	public GhostStateBase(SampleGridXY grid, Ghost ghost)
+	public void Init(SampleGridXY grid, Ghost ghost)
 	{
 		_grid = grid;
 		_ghost = ghost;

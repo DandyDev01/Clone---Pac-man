@@ -116,6 +116,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5569429896897158619}
+  - {fileID: 4560948870267773075}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &4069419104417700252
@@ -165,8 +166,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90afcd8be6b595643829e271e013365a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 600
+  _speed: 5
   _grid: {fileID: 0}
   _target: {fileID: 0}
   _marker: {fileID: 4388725208322387734, guid: 777799611428c974f838d1797f44d773, type: 3}
   _chaseState: {fileID: 0}
+--- !u!1 &9179059607399957980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4560948870267773075}
+  m_Layer: 7
+  m_Name: ChaseState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4560948870267773075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9179059607399957980}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5096289189558603336}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class OrangeGhostChaseState : GhostStateBase
 {
-	public OrangeGhostChaseState(SampleGridXY grid, Ghost ghost) : base(grid, ghost)
-	{
-	}
-
 	public override GhostStateBase CheckForSwitchState()
 	{
 		throw new System.NotImplementedException();

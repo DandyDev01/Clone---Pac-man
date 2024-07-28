@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class RedGhostChaseState : GhostStateBase
 {
-	public RedGhostChaseState(SampleGridXY grid, Ghost ghost) : base(grid, ghost)
-	{
-	}
-
 	public override GhostStateBase CheckForSwitchState()
 	{
 		throw new System.NotImplementedException();
@@ -17,7 +13,6 @@ public class RedGhostChaseState : GhostStateBase
 
 	public override void EnterState()
 	{
-		_currentTarget = new Node(_playerTransform.position);
 		 _ghost.StartCoroutine(PathUpdater());
 	}
 

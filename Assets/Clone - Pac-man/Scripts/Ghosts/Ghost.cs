@@ -22,14 +22,14 @@ public class Ghost : MonoBehaviour
 
 	private void Awake()
 	{
-		_chaseState = new PinkGhostChaseState(_grid, this);
+		_chaseState.Init(_grid, this);
 
 		_currentState = _chaseState;
 	}
 
 	private void Start()
 	{
-		_chaseState.EnterState();
+		_currentState.EnterState();
 	}
 
 	private void Update()

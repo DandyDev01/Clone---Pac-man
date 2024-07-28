@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class BlueGhostChaseState : GhostStateBase
 {
-	public BlueGhostChaseState(SampleGridXY grid, Ghost ghost) : base(grid, ghost)
-	{
-	}
+	[SerializeField] private Ghost _redGhost;
 
 	public override GhostStateBase CheckForSwitchState()
 	{
@@ -16,16 +14,33 @@ public class BlueGhostChaseState : GhostStateBase
 
 	public override void EnterState()
 	{
-		throw new System.NotImplementedException();
+		StartCoroutine(PathUpdater());
 	}
 
 	public override void ExitState()
 	{
-		throw new System.NotImplementedException();
+		StopCoroutine(PathUpdater());
 	}
 
 	protected override Vector3 ChooseTargetLocation()
 	{
-		throw new System.NotImplementedException();
+		Rigidbody2D playerRigidBody = _playerTransform.GetComponent<Rigidbody2D>();
+		Vector2 playerVelocity = playerRigidBody.velocity;
+		Vector2 playerMoveDirection = playerVelocity.normalized;
+
+		Vector3 target = _playerTransform.position + (Vector3)(playerMoveDirection * 2);
+
+		if (_grid.Grid.IsInRange(target) == false)
+			target = _playerTransform.position;
+
+		Vector2 direction = target - _redGhost.transform.position;
+		Vector2 normalizedDirection = direction.normalized;
+		float doubleLength = direction.magnitude * 2;
+		target = normalizedDirection * doubleLength;
+
+		if (_grid.Grid.IsInRange(target) == false)
+			target = _playerTransform.position;
+
+		return target;
 	}
 }
