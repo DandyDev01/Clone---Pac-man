@@ -23,6 +23,9 @@ namespace Grid
 			if (vector.x < 0 || vector.x >= columns) return Vector2.up * -1;
 			if (vector.y < 0 || vector.y >= rows) return Vector2.up * -1;
 
+			vector.x = Mathf.FloorToInt(vector.x);
+			vector.y = Mathf.FloorToInt(vector.y);
+
 			return vector;
 		}
 

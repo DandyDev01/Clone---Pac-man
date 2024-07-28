@@ -173,9 +173,9 @@ namespace Grid
 
 		public IEnumerable<Vector3> GetNeighboursWorldPositions(Vector3 worldPosition)
 		{
-			Vector3[] neighbours = { new Vector3(0, 1), new Vector3(1, 1),
-				new Vector3(1, 0), new Vector3(1, -1), new Vector3(0, -1),
-				new Vector3(-1, -1), new Vector3(-1, 0), new Vector3(-1, 1) };
+			Vector3[] neighbours = { new Vector3(0, 1),
+				new Vector3(1, 0),  new Vector3(0, -1)
+				, new Vector3(-1, 0) };
 
 			List<Vector3> results = new List<Vector3>();
 

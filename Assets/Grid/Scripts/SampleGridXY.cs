@@ -18,6 +18,7 @@ namespace Grid
 		[SerializeField] private float cellSize = 1;
 		[SerializeField] Tilemap _tilemap;
 		[SerializeField] private GameObject _marker;
+		[SerializeField] private GameObject _marker1;
 		[SerializeField] private Transform s;
 		[SerializeField] private Transform t;
 
@@ -35,11 +36,6 @@ namespace Grid
 		{
 			grid = new GridXY<bool>(oragin, columns, Rows, CellSize);
 			SetTraversableValues();
-			StartCoroutine(CalculatePath(t.position, s.position));
-		}
-
-		private void Start()
-		{
 		}
 
 		public Vector3 WorldPosition(int row, int col)
@@ -66,13 +62,14 @@ namespace Grid
 						if (Grid.IsInRange(worldPos) == false)
 							continue;
 
-						grid.SetElement(i, j, true);
+						var cell = grid.GetCellPosition(worldPos);
+						grid.SetElement((int)cell.x, (int)cell.y, true);
 					}
 				}
 			}
 		}
 
-		public IEnumerator CalculatePath(Vector2 target, Vector2 start)
+		public List<Node> CalculatePath(Vector2 target, Vector2 start)
 		{
 			Node root = CreateRoot(start);
 			List<Node> nodes = new();
@@ -87,7 +84,6 @@ namespace Grid
 			{
 				if (grid.IsInRange(current._worldPosition) == false)
 				{
-					index++;
 					continue;
 				}
 
@@ -97,7 +93,7 @@ namespace Grid
 					goal = current;
 				}
 
-				Vector3[] neighborsWorldPosition = grid.GetNeighboursWorldPositions(start).ToArray();
+				Vector3[] neighborsWorldPosition = grid.GetNeighboursWorldPositions(current._worldPosition).ToArray();
 
 				List<Vector3> traversable = new();
 
@@ -121,8 +117,7 @@ namespace Grid
 				index += 1;
 				current = nodes[index];
 
-				Instantiate(_marker, current._worldPosition, Quaternion.identity);
-				yield return new WaitForSeconds(0f);
+				//Instantiate(_marker, current._worldPosition, Quaternion.identity);
 			}
 
 			List<Node> path = new();
@@ -136,6 +131,11 @@ namespace Grid
 			}
 
 			path.Reverse();
+
+			index = 0;
+			goalFound = false;
+
+			return path;
 		}
 
 		private Node CreateRoot(Vector2 start)
