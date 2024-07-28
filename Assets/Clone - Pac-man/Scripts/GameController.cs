@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 	public GameStateBase GameOverState { get; private set; }
 	public GameStateBase GameWinState{ get; private set; }
 
-	private int _maxLives = 3;
+	private const int _maxLives = 3;
     private int _remainingLives = 3;
     private int _score;
 
@@ -80,6 +80,9 @@ public class GameController : MonoBehaviour
 	private void Win()
 	{
 		SwitchState(GameWinState);
+
+		if (_remainingLives < _maxLives)
+			_remainingLives += 1;
 	}
 
 	private void HandleDeath()

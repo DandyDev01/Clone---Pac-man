@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,7 +10,7 @@ public static class Extensions
 
     public static T GetRandom<T>(this T[] array)
 	{
-		return array[Random.Range(0, array.Length)];
+		return array[UnityEngine.Random.Range(0, array.Length)];
 	}
 
 	public static void AddEventTrigger(this Transform transform, EventTriggerType triggerType,
@@ -173,5 +175,10 @@ public static class Extensions
 			audioSource.volume = lowered;
 			yield return Helpers.GetWait(0.1f);
 		}
+	}
+
+	public static bool Contains<T>(this T[] collection, Func<T, bool> p)
+	{
+		return collection.Where(p).Any();
 	}
 }

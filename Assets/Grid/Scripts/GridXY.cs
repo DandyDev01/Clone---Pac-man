@@ -22,6 +22,7 @@ namespace Grid
 			Vector3 vector = new Vector3(((worldPosition.x / cellSize)), ((worldPosition.y / cellSize))) - oragin;
 			if (vector.x < 0 || vector.x >= columns) return Vector2.up * -1;
 			if (vector.y < 0 || vector.y >= rows) return Vector2.up * -1;
+
 			return vector;
 		}
 

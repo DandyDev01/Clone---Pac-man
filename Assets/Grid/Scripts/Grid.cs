@@ -131,6 +131,23 @@ namespace Grid
 			Vector3 neighbourCell = GetCellPosition(GetNeighbourWorldPosition(worldPosition, neighbourWanted));
 			return Cells[(int)neighbourCell.x, (int)neighbourCell.y];
 		}
+
+		public IEnumerable<Vector3> GetNeighboursCells(Vector3 worldPosition)
+		{
+			Vector3 cell = GetCellPosition(worldPosition);
+			Vector3[] neighbours = { new Vector3(0, 1), new Vector3(1, 1),
+				new Vector3(1, 0), new Vector3(1, -1), new Vector3(0, -1),
+				new Vector3(-1, -1), new Vector3(-1, 0), new Vector3(-1, 1) };
+
+			List<Vector3> results = new List<Vector3>();
+
+			foreach (var item in neighbours)
+			{
+				results.Add(cell + item);
+			}
+
+			return results;
+		}
 		
 		/// <summary>
 		/// Get the neighbours of a cell in world space
@@ -149,6 +166,22 @@ namespace Grid
 			foreach (var item in neighbours)
 			{
 				results.Add(GetWorldPosition(col, row) + item);
+			}
+
+			return results;
+		}
+
+		public IEnumerable<Vector3> GetNeighboursWorldPositions(Vector3 worldPosition)
+		{
+			Vector3[] neighbours = { new Vector3(0, 1), new Vector3(1, 1),
+				new Vector3(1, 0), new Vector3(1, -1), new Vector3(0, -1),
+				new Vector3(-1, -1), new Vector3(-1, 0), new Vector3(-1, 1) };
+
+			List<Vector3> results = new List<Vector3>();
+
+			foreach (var item in neighbours)
+			{
+				results.Add(worldPosition + item);
 			}
 
 			return results;
