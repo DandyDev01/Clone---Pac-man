@@ -87,7 +87,7 @@ namespace Grid
 			// normalize the target location to the grid coords (alignment)
 			target = grid.GetCellPosition(target);
 			target = grid.GetWorldPosition((int)target.x, (int)target.y);
-
+			 
 			Node root = CreateRoot(start);
 			List<Node> nodes = new();
 			bool goalFound = false;
