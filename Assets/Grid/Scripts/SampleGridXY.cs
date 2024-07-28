@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using static Codice.CM.Common.CmCallContext;
 
@@ -23,6 +24,8 @@ namespace Grid
 		[SerializeField] private Transform t;
 
 
+		private List<GameObject> _markers;
+
 		private GridXY<bool> grid;
 
 		public int Columns { get { return columns; } }
@@ -35,6 +38,7 @@ namespace Grid
 		public void Awake()
 		{
 			grid = new GridXY<bool>(oragin, columns, Rows, CellSize);
+			_markers = new List<GameObject>();
 			SetTraversableValues();
 		}
 
@@ -75,6 +79,16 @@ namespace Grid
 			List<Node> nodes = new();
 			bool goalFound = false;
 
+			//if (_markers.Count > 0)
+			//{
+			//	foreach (var marker in _markers)
+			//	{
+			//		Destroy(marker.gameObject);
+			//	}
+
+			//	_markers.Clear();
+			//}
+
 			nodes.Add(root);
 
 			int index = 0;
@@ -87,7 +101,7 @@ namespace Grid
 					continue;
 				}
 
-				if (current._worldPosition == (Vector3)target)
+				if (current._worldPosition.Approx((Vector3)target))
 				{
 					goalFound = true;
 					goal = current;
@@ -108,22 +122,29 @@ namespace Grid
 				foreach (var item in traversable)
 				{
 					var newNode = new Node(item, current);
-					if (nodes.Where(x => x._worldPosition == newNode._worldPosition).Any() == false)
+					if (nodes.Where(x => x._worldPosition.Approx(newNode._worldPosition)).Any() == false)
 					{
 						nodes.Add(newNode);
 					}
 				}
 
 				index += 1;
+				if (index >= nodes.Count)
+				{
+					Debug.Log("issue");
+					return new List<Node>();
+				}
+
 				current = nodes[index];
 
-				//Instantiate(_marker, current._worldPosition, Quaternion.identity);
+				//var g = Instantiate(_marker, current._worldPosition, Quaternion.identity);
+				//_markers.Add(g);
 			}
 
 			List<Node> path = new();
 
 			int i = 0;
-			while (current._worldPosition != root._worldPosition && i < 1300)
+			while (current._worldPosition.Approx(root._worldPosition) == false && i < 1300)
 			{
 				path.Add(current);
 				current = current._parent;
@@ -165,6 +186,8 @@ namespace Grid
 		}
 	}
 
+	
+
 	public class Node
 	{
 		public readonly List<Node> _children = new();
@@ -191,4 +214,35 @@ namespace Grid
 			};
 		}
 	}
+
+
+	public static class Extensions
+	{
+
+		public static bool Approx(this Vector3 me, Vector3 other)
+		{
+			float x1 = me.x;
+			float y1 = me.y;
+			float z1 = me.z;
+			float x2 = other.x;
+			float y2 = other.y;
+			float z2 = other.z;
+
+			if (Mathf.Approximately(x1, x2) && Mathf.Approximately(y1, y2) && Mathf.Approximately(z1, z2))
+				return true;
+
+			return false;
+		}
+
+		public static T GetRandom<T>(this T[] array)
+		{
+			return array[UnityEngine.Random.Range(0, array.Length)];
+		}
+
+		public static bool Contains<T>(this T[] collection, Func<T, bool> p)
+		{
+			return collection.Where(p).Any();
+		}
+	}
+
 }

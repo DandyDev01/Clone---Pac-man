@@ -8,7 +8,22 @@ using UnityEngine.EventSystems;
 public static class Extensions
 {
 
-    public static T GetRandom<T>(this T[] array)
+	public static bool Approx(this Vector3 me, Vector3 other)
+	{
+		float x1 = me.x;
+		float y1 = me.y;
+		float z1 = me.z;
+		float x2 = other.x;
+		float y2 = other.y;
+		float z2 = other.z;
+
+		if (Mathf.Approximately(x1, x2) && Mathf.Approximately(y1, y2) && Mathf.Approximately(z1, z2))
+			return true;
+
+		return false;
+	}
+
+	public static T GetRandom<T>(this T[] array)
 	{
 		return array[UnityEngine.Random.Range(0, array.Length)];
 	}

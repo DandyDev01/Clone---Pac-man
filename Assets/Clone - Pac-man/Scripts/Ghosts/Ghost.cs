@@ -48,6 +48,11 @@ public class Ghost : MonoBehaviour
 		{
 			_path = _grid.CalculatePath(_target.position, transform.position);
 
+			foreach (Node node in _path)
+			{
+				Instantiate(_marker, node._worldPosition, Quaternion.identity);
+			}
+
 			_index = 0;
 			Debug.Log("update");
 			yield return new WaitForSeconds(1f);
