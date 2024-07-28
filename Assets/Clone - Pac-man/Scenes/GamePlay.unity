@@ -16703,10 +16703,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1652635667702890513, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
-      propertyPath: m_Color.g
-      value: 0.9118239
-      objectReference: {fileID: 0}
     - target: {fileID: 2176398971566626380, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
       propertyPath: m_Name
       value: Player
@@ -16751,81 +16747,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8773619705133586507, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
+      propertyPath: _grid
+      value: 
+      objectReference: {fileID: 1060372128}
+    - target: {fileID: 8773619705133586507, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
+      propertyPath: _spawn
+      value: 
+      objectReference: {fileID: 266325489}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2176398971566626380, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7616999389809406230}
-    - targetCorrespondingSourceObject: {fileID: 2176398971566626380, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7616999389809406231}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
---- !u!1 &7616999389809406229 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2176398971566626380, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
+--- !u!114 &7616999389809406231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8773619705133586507, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}
   m_PrefabInstance: {fileID: 7616999389809406228}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7616999389809406230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7616999389809406229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: cf725ac4bd48d674a9b88062d97907c5, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7616999389809406229}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: de2f7fe3-070c-400c-bc72-47b710ec2815
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &7616999389809406231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7616999389809406229}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35ce35c2c5e77e0459c38998c68e4d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 600
 --- !u!4 &7616999389809406232 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2634957448043628033, guid: a77ea9867068adb4ebd6f0fe24dbf4ee, type: 3}

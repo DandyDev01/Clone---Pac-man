@@ -94,8 +94,6 @@ public class GameController : MonoBehaviour
             // game over
             return;
         }
-
-        _player.transform.position = _spawn.position;
 	}
 
 	private void AddToScore(int amount)

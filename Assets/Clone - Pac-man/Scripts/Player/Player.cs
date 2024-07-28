@@ -1,3 +1,4 @@
+using Grid;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,17 +8,22 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
-	public PlayerInput Input { get; private set; }
+	[SerializeField] private Transform _spawn;
+	[SerializeField] private SampleGridXY _grid;
 
 	private Animator _animator;
 	private SpriteRenderer _spriteRenderer;
 	private Rigidbody2D _rigidbody;
 	private PlayerStateBase _currentState;
 
+	public PlayerInput Input { get; private set; }
+	public SampleGridXY Grid => _grid;
+	public Vector3 Spawn => _spawn.position;
 	public PlayerStateBase IdleState { get; private set; }
 	public PlayerStateBase MoveState { get; private set; }
 	public PlayerStateBase DeadState { get; private set; }
 	public bool HasBeenHit { get; set; }
+	public float Speed => _speed;
 
     public Action OnDealth;
 	public Action<int> OnPickup;
@@ -53,6 +59,7 @@ public class Player : MonoBehaviour
 		{
 			HasBeenHit = true;
 			OnDealth?.Invoke();
+			SwitchState(DeadState);
 		}
 	}
 
