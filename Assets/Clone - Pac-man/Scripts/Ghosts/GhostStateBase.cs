@@ -128,7 +128,6 @@ public abstract class GhostStateBase : MonoBehaviour
 
     public abstract void ExitState();
 
-
     public abstract GhostStateBase CheckForSwitchState();
 
 }

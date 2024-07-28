@@ -20,7 +20,7 @@ public class GameRunState : GameStateBase
 
 	public override GameStateBase RunState()
 	{
-		_gameController.Player.Move(_gameController.Input.currentActionMap.actions[0].ReadValue<Vector2>());
+		//_gameController.Player.Move(_gameController.Input.currentActionMap.actions[0].ReadValue<Vector2>());
 
 		return CheckForStateSwitch();
 	}
