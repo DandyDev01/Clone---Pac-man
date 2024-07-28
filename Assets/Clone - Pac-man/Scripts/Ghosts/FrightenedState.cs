@@ -1,10 +1,8 @@
-using Grid;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class RedGhostChaseState : GhostStateBase
+public class FrightenedState : GhostStateBase
 {
 	public override GhostStateBase CheckForSwitchState()
 	{
@@ -13,18 +11,15 @@ public class RedGhostChaseState : GhostStateBase
 
 	public override void EnterState()
 	{
-		 //_ghost.StartCoroutine(PathUpdater());
 	}
 
 	public override void ExitState()
 	{
-		//_ghost.StopCoroutine(PathUpdater());
 	}
 
 	protected override Vector3 ChooseTargetLocation()
 	{
-		return _playerTransform.position;
+		// pick a psuedorandom location.
+		return Vector3.zero;
 	}
-
-	
 }

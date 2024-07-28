@@ -14,12 +14,12 @@ public class BlueGhostChaseState : GhostStateBase
 
 	public override void EnterState()
 	{
-		StartCoroutine(PathUpdater());
+		//StartCoroutine(PathUpdater());
 	}
 
 	public override void ExitState()
 	{
-		StopCoroutine(PathUpdater());
+		//StopCoroutine(PathUpdater());
 	}
 
 	protected override Vector3 ChooseTargetLocation()

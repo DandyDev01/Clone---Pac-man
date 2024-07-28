@@ -12,12 +12,12 @@ public class PinkGhostChaseState : GhostStateBase
 
 	public override void EnterState()
 	{
-		_ghost.StartCoroutine(PathUpdater());
+		//_ghost.StartCoroutine(PathUpdater());
 	}
 
 	public override void ExitState()
 	{
-		_ghost.StopCoroutine(PathUpdater());
+		//_ghost.StopCoroutine(PathUpdater());
 	}
 
 	protected override Vector3 ChooseTargetLocation()

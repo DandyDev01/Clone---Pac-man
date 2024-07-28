@@ -14,6 +14,8 @@ public abstract class GhostStateBase : MonoBehaviour
 	protected Node _currentTarget;
 	protected int _index = 0;
 
+	private List<GameObject> _markers = new();
+
 	public Action OnTargetReached;
 
 	public void Init(SampleGridXY grid, Ghost ghost)
@@ -60,6 +62,35 @@ public abstract class GhostStateBase : MonoBehaviour
 		}
 	}
    
+	public void UpdatePath()
+	{
+		foreach (var item in _markers)
+		{
+			GameObject.Destroy(item.gameObject);
+		}
+
+		_markers.Clear();
+
+		List<Node> newPath = _grid.CalculatePath(ChooseTargetLocation(), _ghost.transform.position);
+
+		if (newPath.Count > 0)
+		{
+			_path.Clear();
+			_path.AddRange(newPath);
+
+		}
+
+		_index = 0;
+
+		_currentTarget = _path.First();
+
+		foreach (Node node in _path)
+		{
+			GameObject marker = GameObject.Instantiate(_ghost.Marker, node._worldPosition, Quaternion.identity);
+			_markers.Add(marker);
+		}
+	}
+
 	public GhostStateBase RunState(Grid.SampleGridXY _grid, Ghost ghost)
 	{
 		if (_index >= _path.Count)
@@ -70,7 +101,7 @@ public abstract class GhostStateBase : MonoBehaviour
 
 		_ghost.Move(_currentTarget._worldPosition);
 
-		if (ghost.transform.position == _currentTarget._worldPosition)
+		if (ghost.transform.position.Approx(_currentTarget._worldPosition))
 		{
 			_index += 1;
 

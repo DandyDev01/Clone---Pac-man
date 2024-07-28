@@ -60,13 +60,17 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7602747182243338698, guid: 16d27c3080dbde443b1677474a299f5e, type: 3}
+      propertyPath: _homePath.Array.size
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 8395160150641824906, guid: 16d27c3080dbde443b1677474a299f5e, type: 3}
       propertyPath: m_Name
       value: Ghost Red
       objectReference: {fileID: 0}
     - target: {fileID: 8858964792246837861, guid: 16d27c3080dbde443b1677474a299f5e, type: 3}
       propertyPath: _speed
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8858964792246837861, guid: 16d27c3080dbde443b1677474a299f5e, type: 3}
       propertyPath: _chaseState
