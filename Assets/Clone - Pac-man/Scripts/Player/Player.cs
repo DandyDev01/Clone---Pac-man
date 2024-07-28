@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed;
 	public PlayerInput Input { get; private set; }
 
+	private Animator _animator;
+	private SpriteRenderer _spriteRenderer;
 	private Rigidbody2D _rigidbody;
 	private PlayerStateBase _currentState;
 
@@ -20,9 +22,10 @@ public class Player : MonoBehaviour
     public Action OnDealth;
 	public Action<int> OnPickup;
 
-
 	private void Awake()
 	{
+		_spriteRenderer = GetComponentInChildren<SpriteRenderer>();	
+		_animator = GetComponentInChildren<Animator>();
 		_rigidbody = GetComponent<Rigidbody2D>();   
 		Input = GetComponent<PlayerInput>();
 
@@ -57,6 +60,17 @@ public class Player : MonoBehaviour
     {
         _rigidbody.velocity = Time.deltaTime * _speed * direction;
     }
+
+	public void Rotate(float angle)
+	{
+		Transform transform = _spriteRenderer.transform;
+		transform.eulerAngles = new Vector3(0, 0, angle);
+	}
+
+	public void PlayAnimation(string animationName)
+	{
+		_animator.Play(animationName);
+	}
 
 	public void Pickup(int amount)
 	{

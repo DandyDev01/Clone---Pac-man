@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class PlayerMoveState : PlayerStateBase
 
 	public override void EnterState()
 	{
+		_player.PlayAnimation("Move");
 		Debug.Log("Enter Player Move");
 	}
 
@@ -33,7 +35,31 @@ public class PlayerMoveState : PlayerStateBase
 	public override PlayerStateBase RunState()
 	{
 		_player.Move(_player.Input.currentActionMap.actions[0].ReadValue<Vector2>());
+		_player.Rotate(MovementDirectionToRotation());
 
 		return CheckForSwitchState();
+	}
+
+	private float MovementDirectionToRotation()
+	{
+		Vector2 direction = _player.Input.currentActionMap.actions[0].ReadValue<Vector2>();
+		if (direction.x > 0)
+		{
+			return 0;
+		} 
+		else if (direction.y > 0) 
+		{
+			return 90;
+		}
+		else if (direction.x < 0)
+		{
+			return -180;
+		}
+		else if (direction.y < 0)
+		{
+			return 270;
+		}
+
+		return 0;
 	}
 }

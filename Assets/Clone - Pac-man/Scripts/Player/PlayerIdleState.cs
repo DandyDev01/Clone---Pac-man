@@ -23,6 +23,7 @@ public class PlayerIdleState : PlayerStateBase
 	public override void EnterState()
 	{
 		Debug.Log("Enter Player Idle");
+		_player.PlayAnimation("Idle");
 	}
 
 	public override void ExitState()
