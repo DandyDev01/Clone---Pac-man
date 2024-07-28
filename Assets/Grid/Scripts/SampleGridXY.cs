@@ -18,10 +18,6 @@ namespace Grid
 		[SerializeField] private int rows = 1;
 		[SerializeField] private float cellSize = 1;
 		[SerializeField] Tilemap _tilemap;
-		[SerializeField] private GameObject _marker;
-		[SerializeField] private GameObject _marker1;
-		[SerializeField] private Transform s;
-		[SerializeField] private Transform t;
 
 		private GridXY<bool> grid;
 

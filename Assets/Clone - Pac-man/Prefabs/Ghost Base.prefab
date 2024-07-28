@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0.04265044, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -169,3 +169,4 @@ MonoBehaviour:
   _grid: {fileID: 0}
   _target: {fileID: 0}
   _marker: {fileID: 4388725208322387734, guid: 777799611428c974f838d1797f44d773, type: 3}
+  _chaseState: {fileID: 0}

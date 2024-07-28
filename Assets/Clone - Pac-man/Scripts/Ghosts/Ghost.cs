@@ -12,62 +12,35 @@ public class Ghost : MonoBehaviour
 	[SerializeField] private Transform _target;
 	[SerializeField] private GameObject _marker;
 
-	private List<Node> _path;
-	private Node _currentTarget;
-	private int _index = 0;
+	[Header("States")]
+	[SerializeField] private GhostStateBase _chaseState;
+
+	private GhostStateBase _currentState;
+
+	public GameObject Marker => _marker;
+	public float Speed => _speed;
+
+	private void Awake()
+	{
+		_chaseState = new RedGhostChaseState(_grid, this);
+
+		_currentState = _chaseState;
+	}
 
 	private void Start()
 	{
-
-		StartCoroutine(PathUpdater());
-
-		_currentTarget = _path.First();
+		_chaseState.EnterState();
 	}
 
 	private void Update()
 	{
-		if (_index >= _path.Count)
-			return;
+		GhostStateBase nextState = _currentState.RunState(_grid, this);
 
-		transform.position = Vector2.MoveTowards(transform.position, _currentTarget._worldPosition, _speed * Time.deltaTime);
-
-		if (transform.position == _currentTarget._worldPosition)
+		if (nextState != _currentState)
 		{
-			_index += 1;
-
-			if (_index >= _path.Count)
-				return;
-
-			_currentTarget = _path[_index];
-		}
-	}
-
-	private IEnumerator PathUpdater()
-	{
-		List<GameObject> markers = new();
-		while (true)
-		{
-			List<Node> newPath = _grid.CalculatePath(_target.position, transform.position);
-
-			if (newPath.Count > 0)
-				_path = newPath;
-
-			foreach (Node node in _path)
-			{
-				GameObject marker = Instantiate(_marker, node._worldPosition, Quaternion.identity);
-				markers.Add(marker);
-			}
-
-			_index = 0;
-			Debug.Log("update");
-			yield return new WaitForSeconds(1f);
-
-			foreach (var item in markers)
-			{
-				Destroy(item.gameObject);
-			}
-
-			markers.Clear();
+			_currentState.ExitState();
+			_currentState = nextState;
+			_currentState.EnterState();
 		}
 	}
 }
