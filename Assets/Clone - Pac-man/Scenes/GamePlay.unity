@@ -11691,6 +11691,10 @@ PrefabInstance:
       propertyPath: _redGhost
       value: 
       objectReference: {fileID: 401992509}
+    - target: {fileID: 8973634438222512891, guid: d60ac4084743bf84e9a0bfc295efa5c2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

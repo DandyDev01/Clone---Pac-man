@@ -27,42 +27,6 @@ public abstract class GhostStateBase : MonoBehaviour
 		_path = new List<Node>();
 	}
 
-	protected IEnumerator PathUpdater()
-	{
-		List<GameObject> markers = new();
-		while (true)
-		{
-			List<Node> newPath = _grid.CalculatePath(ChooseTargetLocation(), _ghost.transform.position);
-
-			if (newPath.Count > 0)
-			{
-				_path.Clear();
-				_path.AddRange(newPath);
-
-			}
-
-			foreach (Node node in _path)
-			{
-				GameObject marker = GameObject.Instantiate(_ghost.Marker, node._worldPosition, Quaternion.identity);
-				markers.Add(marker);
-			}
-
-			_index = 0;
-			Debug.Log("update");
-
-			_currentTarget = _path.First();
-
-			yield return new WaitForSeconds(1f);
-
-			foreach (var item in markers)
-			{
-				GameObject.Destroy(item.gameObject);
-			}
-
-			markers.Clear();
-		}
-	}
-   
 	public void UpdatePath()
 	{
 		foreach (var item in _markers)

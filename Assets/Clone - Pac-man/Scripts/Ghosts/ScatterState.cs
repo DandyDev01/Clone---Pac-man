@@ -37,6 +37,12 @@ public class ScatterState : GhostStateBase
 
 		_path.AddRange(pathToHome);
 
+		foreach (Node node in pathToHome)
+		{
+			GameObject g = Instantiate(_ghost.Marker, node._worldPosition, Quaternion.identity);
+			_markers.Add(g);
+		}
+
 		_timer.Play();
 
 		_currentTarget = _path.First();
