@@ -21,11 +21,12 @@ public class FrightenedState : GhostStateBase
 	public override void EnterState()
 	{
 		_ghost.PlayAnimation("Frightened");
+		_ghost.SetSpeedModifier(0.5f);
 	}
 
 	public override void ExitState()
 	{
-		Debug.Log("Exit Frightened");
+		_ghost.SetSpeedModifier(1f);
 	}
 
 	protected override Vector3 ChooseTargetLocation()

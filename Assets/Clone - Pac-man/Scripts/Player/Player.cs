@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 	private SpriteRenderer _spriteRenderer;
 	private Rigidbody2D _rigidbody;
 	private PlayerStateBase _currentState;
+	private float _speedModifier = 1f;
 
 	public PlayerInput Input { get; private set; }
 	public SampleGridXY Grid => _grid;
@@ -59,7 +60,8 @@ public class Player : MonoBehaviour
 	{
 		if (collision.transform.tag == "Ghost")
 		{
-			if (collision.GetComponent<Ghost>().CurrentState is FrightenedState)
+			GhostStateBase state = collision.GetComponent<Ghost>().CurrentState;
+			if (state is FrightenedState || state is DeadState)
 				return; 
 
 			HasBeenHit = true;
@@ -70,13 +72,18 @@ public class Player : MonoBehaviour
 
 	public void Move(Vector2 direction)
     {
-        _rigidbody.velocity = Time.deltaTime * _speed * direction;
+        _rigidbody.velocity = Time.deltaTime * _speed * _speedModifier * direction;
     }
 
 	public void Rotate(float angle)
 	{
 		Transform transform = _spriteRenderer.transform;
 		transform.eulerAngles = new Vector3(0, 0, angle);
+	}
+
+	public void SetSpeedModifier(float value)
+	{
+		_speedModifier = value;
 	}
 
 	public void PlayAnimation(string animationName)

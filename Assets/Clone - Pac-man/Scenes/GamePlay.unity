@@ -9063,6 +9063,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2105096720}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &909770515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 909770516}
+  m_Layer: 0
+  m_Name: GhostHouse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &909770516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909770515}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.41, y: 1.35, z: 0.016666986}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &935278338
 GameObject:
   m_ObjectHideFlags: 0
@@ -11407,6 +11438,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 274297880550707670, guid: d60ac4084743bf84e9a0bfc295efa5c2, type: 3}
+      propertyPath: _ghostHouse
+      value: 
+      objectReference: {fileID: 909770516}
     - target: {fileID: 1902695952731863985, guid: d60ac4084743bf84e9a0bfc295efa5c2, type: 3}
       propertyPath: _pathUpdateTriggers.Array.size
       value: 34
@@ -12628,6 +12663,10 @@ PrefabInstance:
       propertyPath: _pathUpdateTriggers.Array.data[33]
       value: 
       objectReference: {fileID: 1253127367}
+    - target: {fileID: 1316068275354454290, guid: 0e9e4d710c1d1ec46beb786eb684bb64, type: 3}
+      propertyPath: _ghostHouse
+      value: 
+      objectReference: {fileID: 909770516}
     - target: {fileID: 1424560820373442027, guid: 0e9e4d710c1d1ec46beb786eb684bb64, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -15746,6 +15785,10 @@ PrefabInstance:
       propertyPath: _pathUpdateTriggers.Array.data[33]
       value: 
       objectReference: {fileID: 1253127367}
+    - target: {fileID: 8976933817304435122, guid: d9a82a3e9f0ad3248b57537185caf829, type: 3}
+      propertyPath: _ghostHouse
+      value: 
+      objectReference: {fileID: 909770516}
     - target: {fileID: 9012523251766316363, guid: d9a82a3e9f0ad3248b57537185caf829, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -17023,6 +17066,10 @@ PrefabInstance:
       propertyPath: _pathUpdateTriggers.Array.data[33]
       value: 
       objectReference: {fileID: 1253127367}
+    - target: {fileID: 5933145577884562604, guid: 9bdd1c0974eb84f419255e8cf3582a72, type: 3}
+      propertyPath: _ghostHouse
+      value: 
+      objectReference: {fileID: 909770516}
     - target: {fileID: 6039423775011287125, guid: 9bdd1c0974eb84f419255e8cf3582a72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -17312,3 +17359,4 @@ SceneRoots:
   - {fileID: 1842887089}
   - {fileID: 567799188}
   - {fileID: 2211167123763342871}
+  - {fileID: 909770516}

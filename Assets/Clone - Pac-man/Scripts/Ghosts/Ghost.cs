@@ -21,6 +21,7 @@ public class Ghost : MonoBehaviour
 	private GhostStateBase _currentState;
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
+	private float _speedModifier = 1;
 
 	public GameObject Marker => _marker;
 	public GhostStateBase CurrentState => _currentState;
@@ -76,16 +77,14 @@ public class Ghost : MonoBehaviour
 
 	public void Move(Vector3 targetPosition)
 	{
-		// cannot reach target
 		Vector2 direction = targetPosition - transform.position;
 
-		_rigidbody.velocity = direction.normalized * _speed * Time.deltaTime;
+		_rigidbody.velocity = direction.normalized * _speed * _speedModifier * Time.deltaTime;
+	}
 
-		//_rigidbody.MovePosition(_rigidbody.position + (_speed * direction.normalized) *  Time.deltaTime);
-
-		// collisions are not triggered
-		//transform.position = Vector2.MoveTowards(transform.position, targetPosition,
-		//	Speed * Time.deltaTime);
+	public void SetSpeedModifier(float value)
+	{
+		_speedModifier = value;
 	}
 
 	public void PlayAnimation(string animationName)

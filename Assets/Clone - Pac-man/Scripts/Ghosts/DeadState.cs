@@ -8,9 +8,24 @@ public class DeadState : GhostStateBase
 {
 	[SerializeField] private Transform _ghostHouse;
 
+	private Timer _timer;
+
+	private void Awake()
+	{
+		_timer = new Timer(10f);
+	}
+
+	private void Update()
+	{
+		_timer.Tick(Time.deltaTime);
+	}
+
 	public override GhostStateBase CheckForSwitchState()
 	{
-		return this;
+		if (_timer.Finished)
+			return _ghost.ChaseState;
+		else 
+			return this;
 	}
 
 	public override void EnterState()
@@ -27,11 +42,16 @@ public class DeadState : GhostStateBase
 
 		_currentTarget = _path.First();
 
+		_timer.Play();
+
 		_ghost.PlayAnimation("Dead");
 	}
 
 	public override void ExitState()
 	{
+		_timer.Stop();
+		_timer.Reset(10f);
+
 		foreach (var item in _markers)
 		{
 			GameObject.Destroy(item.gameObject);
