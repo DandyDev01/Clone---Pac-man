@@ -10,13 +10,10 @@ public class GameResetState : GameStateBase
 
 	public override void EnterStart()
 	{
-		Debug.Log("Enter Game Reset");
-		_gameController.PelletGenerator.Reset();
 	}
 
 	public override void ExitStart()
 	{
-		Debug.Log("Exit Game Reset");
 	}
 
 	public override GameStateBase RunState()

@@ -62,6 +62,14 @@ public class GhostCordinator : MonoBehaviour
 		_pinkGhost.SwitchState(_pinkGhost.ScatterState);
 	}
 
+	public void ChaseMode()
+	{
+		_redGhost.SwitchState(_redGhost.ChaseState);
+		_blueGhost.SwitchState(_blueGhost.ChaseState);
+		_orangeGhost.SwitchState(_orangeGhost.ChaseState);
+		_pinkGhost.SwitchState(_pinkGhost.ChaseState);
+	}
+
 	public void EnableRed()
 	{
 		_redGhost.enabled = true;

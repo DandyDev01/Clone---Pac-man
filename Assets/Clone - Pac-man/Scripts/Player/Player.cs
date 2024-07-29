@@ -70,22 +70,38 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Move the player in a direction.
+	/// </summary>
+	/// <param name="direction">Direction to move the player.</param>
 	public void Move(Vector2 direction)
     {
         _rigidbody.velocity = Time.deltaTime * _speed * _speedModifier * direction;
     }
 
+	/// <summary>
+	/// Set the z rotation of the player.
+	/// </summary>
+	/// <param name="angle">Angle to set the z rotation.</param>
 	public void Rotate(float angle)
 	{
 		Transform transform = _spriteRenderer.transform;
 		transform.eulerAngles = new Vector3(0, 0, angle);
 	}
 
+	/// <summary>
+	/// Update the speed modifier of the player.
+	/// </summary>
+	/// <param name="value">Value of the speed modifier</param>
 	public void SetSpeedModifier(float value)
 	{
 		_speedModifier = value;
 	}
 
+	/// <summary>
+	/// Play an animation
+	/// </summary>
+	/// <param name="animationName">Name of animation</param>
 	public void PlayAnimation(string animationName)
 	{
 		_animator.Play(animationName);

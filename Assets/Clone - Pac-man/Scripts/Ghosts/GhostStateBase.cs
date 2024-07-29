@@ -19,6 +19,11 @@ public abstract class GhostStateBase : MonoBehaviour
 
 	public Action OnTargetReached;
 
+	/// <summary>
+	/// Initilize dependancies
+	/// </summary>
+	/// <param name="grid">Grid that is used for pathfinding.</param>
+	/// <param name="ghost">Ghost this state belongs too.</param>
 	public void Init(SampleGridXY grid, Ghost ghost)
 	{
 		_grid = grid;
@@ -27,6 +32,9 @@ public abstract class GhostStateBase : MonoBehaviour
 		_path = new List<Node>();
 	}
 
+	/// <summary>
+	/// Calculate a path from the Ghost that owns this to their target.
+	/// </summary>
 	public void UpdatePath()
 	{
 		foreach (var item in _markers)
@@ -46,7 +54,8 @@ public abstract class GhostStateBase : MonoBehaviour
 
 		_index = 0;
 
-		_currentTarget = _path.First();
+		if (_path.Count > 0)
+			_currentTarget = _path.First();
 
 		foreach (Node node in _path)
 		{
@@ -55,7 +64,11 @@ public abstract class GhostStateBase : MonoBehaviour
 		}
 	}
 
-	public GhostStateBase RunState(Grid.SampleGridXY _grid, Ghost ghost)
+	/// <summary>
+	/// Follow path to target.
+	/// </summary>
+	/// <returns></returns>
+	public GhostStateBase RunState()
 	{
 		if (_index >= _path.Count)
 		{
@@ -82,7 +95,7 @@ public abstract class GhostStateBase : MonoBehaviour
 			_currentTarget = _path[_index];
 		}
 
-		if (Vector3.Distance(ghost.transform.position, _path[_path.Count - 1]._worldPosition) < 0.05f)
+		if (Vector3.Distance(_ghost.transform.position, _path[_path.Count - 1]._worldPosition) < 0.05f)
 		{
 			OnTargetReached?.Invoke();
 			UpdatePath();
@@ -91,6 +104,10 @@ public abstract class GhostStateBase : MonoBehaviour
 		return CheckForSwitchState();
 	}
 
+	/// <summary>
+	/// Calculate where the target position is.
+	/// </summary>
+	/// <returns>World position to move to.</returns>
 	protected abstract Vector3 ChooseTargetLocation();
 
     public abstract void EnterState();
@@ -99,6 +116,9 @@ public abstract class GhostStateBase : MonoBehaviour
 
     public abstract GhostStateBase CheckForSwitchState();
 
+	/// <summary>
+	/// Chooses which directional movement animation to play
+	/// </summary>
 	private void ChooseAnimation()
 	{
 		if (this is DeadState || this is FrightenedState)

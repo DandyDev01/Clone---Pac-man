@@ -49,7 +49,6 @@ public class Ghost : MonoBehaviour
 		_deadState.Init(_grid, this);
 
 		_currentState = _scatterState;
-
 	}
 
 	private void Start()
@@ -60,7 +59,7 @@ public class Ghost : MonoBehaviour
 
 	private void Update()
 	{
-		GhostStateBase nextState = _currentState.RunState(_grid, this);
+		GhostStateBase nextState = _currentState.RunState();
 
 		if (nextState != _currentState)
 		{
@@ -75,6 +74,10 @@ public class Ghost : MonoBehaviour
 		_currentState.EnterState();
 	}
 
+	/// <summary>
+	/// Move to a target location.
+	/// </summary>
+	/// <param name="targetPosition">Location to move to.</param>
 	public void Move(Vector3 targetPosition)
 	{
 		Vector2 direction = targetPosition - transform.position;
@@ -82,16 +85,28 @@ public class Ghost : MonoBehaviour
 		_rigidbody.velocity = direction.normalized * _speed * _speedModifier * Time.deltaTime;
 	}
 
+	/// <summary>
+	/// Update the speed modifier.
+	/// </summary>
+	/// <param name="value">Value to set speed modifier.</param>
 	public void SetSpeedModifier(float value)
 	{
 		_speedModifier = value;
 	}
 
+	/// <summary>
+	/// Play an animation.
+	/// </summary>
+	/// <param name="animationName">Name of animation to play.</param>
 	public void PlayAnimation(string animationName)
 	{
 		_animator.Play(animationName);
 	}
 
+	/// <summary>
+	/// Determine which direction the ghost is moving.
+	/// </summary>
+	/// <returns>Direction of movement.</returns>
 	public Vector2 CalculateMoveDirection()
 	{
 		if (_rigidbody.velocity.x > 0)
