@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,11 +13,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private PauseMenuView _gameOverView;
     [SerializeField] private PauseMenuView _winView;
 
-
     private Player _player;
     private Transform _spawn;
 	private PelletGenerator _pelletGenerator;
 	private GhostCordinator _ghostCordinator;
+	private BuffPellete[] _buffPellets;
 	private const int _maxLives = 3;
     private int _remainingLives = 3;
     private int _score;
@@ -46,6 +47,7 @@ public class GameController : MonoBehaviour
 		_spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
 		_ghostCordinator = FindObjectOfType<GhostCordinator>();
 		_pelletGenerator = FindObjectOfType<PelletGenerator>();
+		_buffPellets = FindObjectsOfType<BuffPellete>();
 
 		_gameOverView.gameObject.SetActive(false);
 		_pauseView.gameObject.SetActive(false);
@@ -101,6 +103,11 @@ public class GameController : MonoBehaviour
             // game over
             return;
         }
+
+		foreach (BuffPellete buffPellet in _buffPellets)
+		{
+			buffPellet.Enable();
+		}
 	}
 
 	private void AddToScore(int amount)
