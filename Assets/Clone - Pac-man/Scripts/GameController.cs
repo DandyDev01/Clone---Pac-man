@@ -89,7 +89,10 @@ public class GameController : MonoBehaviour
 		SwitchState(GameWinState);
 
 		if (_remainingLives < _maxLives)
+		{
 			_remainingLives += 1;
+			_gameView.UpdateLives(_remainingLives);
+		}
 	}
 
 	private void HandleDeath()
@@ -97,6 +100,7 @@ public class GameController : MonoBehaviour
 		_ghostCordinator.ScatterMode();
 
         _remainingLives -= 1;
+		_gameView.UpdateLives(_remainingLives);
 
         if (_remainingLives <= 0)
         {
