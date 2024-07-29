@@ -10137,6 +10137,7 @@ MonoBehaviour:
   rows: 27
   cellSize: 1
   _tilemap: {fileID: 10866006}
+  _marker: {fileID: 4388725208322387734, guid: 777799611428c974f838d1797f44d773, type: 3}
 --- !u!4 &1060372129
 Transform:
   m_ObjectHideFlags: 0

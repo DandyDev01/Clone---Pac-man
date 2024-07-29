@@ -22,6 +22,9 @@ public class DeadState : GhostStateBase
 
 	public override GhostStateBase CheckForSwitchState()
 	{
+		if (_index >= _path.Count && _timer.IsPlaying == false)
+			_timer.Play();
+
 		if (_timer.Finished)
 			return _ghost.ChaseState;
 		else 
@@ -30,19 +33,13 @@ public class DeadState : GhostStateBase
 
 	public override void EnterState()
 	{
-		List<Node> pathToGhostHouse = _grid.CalculatePath(_ghostHouse.position, transform.position);
+		List<Node> pathToGhostHouse = _grid.CalculatePath(_ghostHouse.position, _ghost.transform.position);
 
 		_path.AddRange(pathToGhostHouse);
 
-		foreach (Node node in pathToGhostHouse)
-		{
-			GameObject g = Instantiate(_ghost.Marker, node._worldPosition, Quaternion.identity);
-			_markers.Add(g);
-		}
-
 		_currentTarget = _path.First();
 
-		_timer.Play();
+		_index = 0;
 
 		_ghost.PlayAnimation("Dead");
 	}
@@ -51,17 +48,10 @@ public class DeadState : GhostStateBase
 	{
 		_timer.Stop();
 		_timer.Reset(10f);
-
-		foreach (var item in _markers)
-		{
-			GameObject.Destroy(item.gameObject);
-		}
-
-		_markers.Clear();
 	}
 
 	protected override Vector3 ChooseTargetLocation()
 	{
-		return Vector3.zero;
+		throw new System.Exception("Target location error");
 	}
 }

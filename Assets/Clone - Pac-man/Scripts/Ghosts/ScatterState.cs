@@ -35,15 +35,14 @@ public class ScatterState : GhostStateBase
 	{
 		List<Node> pathToHome = _grid.CalculatePath(_homePath.First().position, _ghost.transform.position);
 
+		_path.Clear();
 		_path.AddRange(pathToHome);
 
-		foreach (Node node in pathToHome)
-		{
-			GameObject g = Instantiate(_ghost.Marker, node._worldPosition, Quaternion.identity);
-			_markers.Add(g);
-		}
-
 		_timer.Play();
+
+		_index = 0;
+
+		_ghost.SetSpeedModifier(2f);
 
 		_currentTarget = _path.First();
 
@@ -55,12 +54,7 @@ public class ScatterState : GhostStateBase
 		_timer.Stop();
 		_timer.Reset(10f);
 
-		foreach (var item in _markers)
-		{
-			GameObject.Destroy(item.gameObject);
-		}
-
-		_markers.Clear();
+		_ghost.SetSpeedModifier(1f);
 
 		OnTargetReached -= SetPathToHomeRoute;
 	}

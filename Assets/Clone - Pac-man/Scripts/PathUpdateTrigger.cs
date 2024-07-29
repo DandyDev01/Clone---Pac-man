@@ -23,7 +23,9 @@ public class PathUpdateTrigger : MonoBehaviour
             ghost.CurrentState is OrangeGhostChaseState || ghost.CurrentState is PinkGhostChaseState ||
             ghost.CurrentState is FrightenedState)
         {
-           ghost.CurrentState.UpdatePath();
+            ghost.LastUpdateTrigger = ghost.CurrentUpdateTrigger;
+            ghost.CurrentUpdateTrigger = this;
+            ghost.CurrentState.UpdatePath();
         }
 	}
 }

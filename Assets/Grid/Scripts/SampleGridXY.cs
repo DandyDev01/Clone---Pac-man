@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -18,6 +19,9 @@ namespace Grid
 		[SerializeField] private int rows = 1;
 		[SerializeField] private float cellSize = 1;
 		[SerializeField] Tilemap _tilemap;
+
+		[SerializeField] private GameObject _marker;
+		private List<GameObject> _markers = new();
 
 		private GridXY<bool> grid;
 
@@ -76,6 +80,8 @@ namespace Grid
 		/// <returns>A path from the start location to target location</returns>
 		public List<Node> CalculatePath(Vector2 target, Vector2 start)
 		{
+			DeletePathMarkers();
+
 			// normalize the start location to grid coords (alignment)
 			start = grid.GetCellPosition(start);
 			start = grid.GetWorldPosition((int)start.x, (int)start.y);
@@ -83,7 +89,7 @@ namespace Grid
 			// normalize the target location to the grid coords (alignment)
 			target = grid.GetCellPosition(target);
 			target = grid.GetWorldPosition((int)target.x, (int)target.y);
-			 
+
 			Node root = CreateRoot(start);
 			List<Node> nodes = new();
 			bool goalFound = false;
@@ -121,6 +127,8 @@ namespace Grid
 					if (nodes.Contains(x => x._worldPosition.Approx(traversableNeighbor._worldPosition)) == false)
 					{
 						nodes.Add(traversableNeighbor);
+						GameObject g = Instantiate(_marker, traversableNeighbor._worldPosition, Quaternion.identity);
+						_markers.Add(g);
 					}
 				}
 
@@ -128,13 +136,34 @@ namespace Grid
 				if (index >= nodes.Count)
 				{
 					Debug.Log("issue");
+					EditorApplication.isPaused = true;
 					return new List<Node>();
 				}
 
 				current = nodes[index];
 			}
 
-			return BuildPath(root, current);
+			DeletePathMarkers();
+
+			List<Node> path = BuildPath(root, current);
+
+			// draw path
+			foreach (var item in path)
+			{
+				GameObject g = Instantiate(_marker, item._worldPosition, Quaternion.identity);
+				_markers.Add(g);
+			}
+
+			return path;
+		}
+
+		private void DeletePathMarkers()
+		{
+			foreach (var item in _markers)
+			{
+				Destroy(item);
+			}
+			_markers.Clear();
 		}
 
 		/// <summary>

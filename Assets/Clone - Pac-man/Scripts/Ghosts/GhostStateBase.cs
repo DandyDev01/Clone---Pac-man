@@ -14,8 +14,7 @@ public abstract class GhostStateBase : MonoBehaviour
 	protected Node _currentTarget;
 	protected int _index = 0;
 	private Vector2 _currentDirection = Vector2.zero;
-
-	protected List<GameObject> _markers = new();
+	private Vector2 _lastDirection = Vector2.zero;
 
 	public Action OnTargetReached;
 
@@ -37,13 +36,6 @@ public abstract class GhostStateBase : MonoBehaviour
 	/// </summary>
 	public void UpdatePath()
 	{
-		foreach (var item in _markers)
-		{
-			GameObject.Destroy(item.gameObject);
-		}
-
-		_markers.Clear();
-
 		List<Node> newPath = _grid.CalculatePath(ChooseTargetLocation(), _ghost.transform.position);
 
 		if (newPath.Count > 0)
@@ -56,12 +48,6 @@ public abstract class GhostStateBase : MonoBehaviour
 
 		if (_path.Count > 0)
 			_currentTarget = _path.First();
-
-		foreach (Node node in _path)
-		{
-			GameObject marker = GameObject.Instantiate(_ghost.Marker, node._worldPosition, Quaternion.identity);
-			_markers.Add(marker);
-		}
 	}
 
 	/// <summary>
@@ -125,6 +111,12 @@ public abstract class GhostStateBase : MonoBehaviour
 			return;
 
 		Vector2 direction = _ghost.CalculateMoveDirection();
+
+		if (direction == _lastDirection)
+			return;
+
+		_lastDirection = _currentDirection;
+		_currentDirection = direction;
 
 		if (direction == Vector2.up)
 		{

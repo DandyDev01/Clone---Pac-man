@@ -23,9 +23,9 @@ public class GhostCordinator : MonoBehaviour
 		_pinkGhost.enabled = false;
 
 		_redReleaseTimer = new Timer(0f);
-		_blueReleaseTimer = new Timer(5f);
-		_orangeReleaseTimer = new Timer(10f);
-		_pinkReleaseTimer = new Timer(15f);
+		_blueReleaseTimer = new Timer(1005f);
+		_orangeReleaseTimer = new Timer(1000f);
+		_pinkReleaseTimer = new Timer(1005f);
 
 		_blueReleaseTimer.Play();
 		_orangeReleaseTimer.Play();

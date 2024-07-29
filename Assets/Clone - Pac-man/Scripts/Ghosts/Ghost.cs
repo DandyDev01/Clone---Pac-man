@@ -8,7 +8,6 @@ using UnityEngine;
 public class Ghost : MonoBehaviour
 {
     [SerializeField] private float _speed;
-	[SerializeField] private GameObject _marker;
 
 	[Header("States")]
 	[SerializeField] private GhostStateBase _chaseState;
@@ -16,14 +15,13 @@ public class Ghost : MonoBehaviour
 	private FrightenedState _frightenedState;
 	private DeadState _deadState;
 
-	private Transform _target;
+	private Transform _playerTransform;
     private SampleGridXY _grid;
 	private GhostStateBase _currentState;
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
 	private float _speedModifier = 1;
 
-	public GameObject Marker => _marker;
 	public GhostStateBase CurrentState => _currentState;
 	public GhostStateBase ScatterState => _scatterState;
 	public GhostStateBase FrightenedState => _frightenedState;
@@ -31,6 +29,8 @@ public class Ghost : MonoBehaviour
 	public GhostStateBase DeadState => _deadState;
 	public Vector3 ScatterPoint => _scatterState.HomePath.First().position;
 	public float Speed => _speed;
+	public PathUpdateTrigger LastUpdateTrigger { get; set; }
+	public PathUpdateTrigger CurrentUpdateTrigger { get; set; }
 
 	private void Awake()
 	{
@@ -38,7 +38,7 @@ public class Ghost : MonoBehaviour
 		_animator = GetComponentInChildren<Animator>();
 
 		_grid = FindObjectOfType<SampleGridXY>();
-		_target = GameObject.FindGameObjectWithTag("Player").transform;
+		_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		_frightenedState = GetComponentInChildren<FrightenedState>();
 		_scatterState = GetComponentInChildren<ScatterState>();
 		_deadState = GetComponentInChildren<DeadState>();
@@ -54,7 +54,6 @@ public class Ghost : MonoBehaviour
 	private void Start()
 	{
 		_currentState.EnterState();
-		_currentState.UpdatePath();
 	}
 
 	private void Update()
