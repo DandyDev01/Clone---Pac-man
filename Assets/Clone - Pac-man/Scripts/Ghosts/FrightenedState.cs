@@ -20,6 +20,7 @@ public class FrightenedState : GhostStateBase
 
 	public override void ExitState()
 	{
+		Debug.Log("Exit Frightened");
 	}
 
 	protected override Vector3 ChooseTargetLocation()

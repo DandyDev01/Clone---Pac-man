@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -42,6 +43,15 @@ public class GhostCordinator : MonoBehaviour
 		_blueReleaseTimer.Tick(Time.deltaTime);
 		_orangeReleaseTimer.Tick(Time.deltaTime);
 		_pinkReleaseTimer.Tick(Time.deltaTime);
+	}
+
+
+	public void FrightenedMode()
+	{
+		_redGhost.SwitchState(_redGhost.FrightenedState);
+		_blueGhost.SwitchState(_blueGhost.FrightenedState);
+		_orangeGhost.SwitchState(_orangeGhost.FrightenedState);
+		_pinkGhost.SwitchState(_pinkGhost.FrightenedState);
 	}
 
 	public void ScatterMode()
