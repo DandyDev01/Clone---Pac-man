@@ -8,9 +8,9 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
-	[SerializeField] private Transform _spawn;
-	[SerializeField] private SampleGridXY _grid;
 
+	private Transform _spawn;
+	private SampleGridXY _grid;
 	private Animator _animator;
 	private SpriteRenderer _spriteRenderer;
 	private Rigidbody2D _rigidbody;
@@ -18,12 +18,12 @@ public class Player : MonoBehaviour
 
 	public PlayerInput Input { get; private set; }
 	public SampleGridXY Grid => _grid;
-	public Vector3 Spawn => _spawn.position;
 	public PlayerStateBase IdleState { get; private set; }
 	public PlayerStateBase MoveState { get; private set; }
 	public PlayerStateBase DeadState { get; private set; }
-	public bool HasBeenHit { get; set; }
+	public Vector3 Spawn => _spawn.position;
 	public float Speed => _speed;
+	public bool HasBeenHit { get; set; }
 
     public Action OnDealth;
 	public Action<int> OnPickup;
@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
 		_animator = GetComponentInChildren<Animator>();
 		_rigidbody = GetComponent<Rigidbody2D>();   
 		Input = GetComponent<PlayerInput>();
+		_spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
+		_grid = FindObjectOfType<SampleGridXY>();
 
 		IdleState = new PlayerIdleState(this);
 		MoveState = new PlayerMoveState(this);

@@ -15,7 +15,7 @@ public abstract class GhostStateBase : MonoBehaviour
 	protected int _index = 0;
 	private Vector2 _currentDirection = Vector2.zero;
 
-	private List<GameObject> _markers = new();
+	protected List<GameObject> _markers = new();
 
 	public Action OnTargetReached;
 
@@ -78,7 +78,6 @@ public abstract class GhostStateBase : MonoBehaviour
 		{
 			_path.Clear();
 			_path.AddRange(newPath);
-
 		}
 
 		_index = 0;
@@ -97,6 +96,7 @@ public abstract class GhostStateBase : MonoBehaviour
 		if (_index >= _path.Count)
 		{
 			OnTargetReached?.Invoke();
+			UpdatePath();
 			return this;
 		}
 
@@ -109,6 +109,7 @@ public abstract class GhostStateBase : MonoBehaviour
 			if (_index >= _path.Count)
 			{
 				OnTargetReached?.Invoke();
+				UpdatePath();
 				return this;
 			}
 
@@ -117,12 +118,13 @@ public abstract class GhostStateBase : MonoBehaviour
 			_currentTarget = _path[_index];
 		}
 
-		if (ghost.transform.position.Approx(_path[_path.Count - 1]._worldPosition))
+		if (Vector3.Distance(ghost.transform.position, _path[_path.Count - 1]._worldPosition) < 0.05f)
 		{
 			OnTargetReached?.Invoke();
+			UpdatePath();
 		}
 
-		return this;
+		return CheckForSwitchState();
 	}
 
 	protected abstract Vector3 ChooseTargetLocation();

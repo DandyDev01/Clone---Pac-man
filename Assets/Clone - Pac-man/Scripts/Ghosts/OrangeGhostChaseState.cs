@@ -7,11 +7,12 @@ public class OrangeGhostChaseState : GhostStateBase
 {
 	public override GhostStateBase CheckForSwitchState()
 	{
-		throw new System.NotImplementedException();
+		return this;
 	}
 
 	public override void EnterState()
 	{
+		UpdatePath();
 	}
 
 	public override void ExitState()

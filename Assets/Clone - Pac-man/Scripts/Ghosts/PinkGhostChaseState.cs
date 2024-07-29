@@ -7,12 +7,12 @@ public class PinkGhostChaseState : GhostStateBase
 {
 	public override GhostStateBase CheckForSwitchState()
 	{
-		throw new System.NotImplementedException();
+		return this;
 	}
 
 	public override void EnterState()
 	{
-		//_ghost.StartCoroutine(PathUpdater());
+		UpdatePath();
 	}
 
 	public override void ExitState()

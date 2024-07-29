@@ -6,28 +6,28 @@ using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private Transform _spawn;
-	[SerializeField] private PelletGenerator _pelletGenerator;
-
 	[Header("UI")]
     [SerializeField] private GameView _gameView;
     [SerializeField] private PauseMenuView _pauseView;
     [SerializeField] private PauseMenuView _gameOverView;
     [SerializeField] private PauseMenuView _winView;
 
-	public PlayerInput Input { get; private set; }
 
+    private Player _player;
+    private Transform _spawn;
+	private PelletGenerator _pelletGenerator;
+	private GhostCordinator _ghostCordinator;
+	private const int _maxLives = 3;
+    private int _remainingLives = 3;
+    private int _score;
+	
+	public PlayerInput Input { get; private set; }
 	public GameStateBase CurrentState { get; private set; }
 	public GameStateBase GameRunState { get; private set; }
 	public GameStateBase GamePauseState { get; private set; }
 	public GameStateBase GameResetState { get; private set; }
 	public GameStateBase GameOverState { get; private set; }
 	public GameStateBase GameWinState{ get; private set; }
-
-	private const int _maxLives = 3;
-    private int _remainingLives = 3;
-    private int _score;
 
 	public GameView GameView => _gameView;
 	public PauseMenuView PauseView => _pauseView;
@@ -42,6 +42,11 @@ public class GameController : MonoBehaviour
 
 	private void Awake()
 	{
+		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+		_spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
+		_ghostCordinator = FindObjectOfType<GhostCordinator>();
+		_pelletGenerator = FindObjectOfType<PelletGenerator>();
+
 		_gameOverView.gameObject.SetActive(false);
 		_pauseView.gameObject.SetActive(false);
 
@@ -87,6 +92,8 @@ public class GameController : MonoBehaviour
 
 	private void HandleDeath()
 	{
+		_ghostCordinator.ScatterMode();
+
         _remainingLives -= 1;
 
         if (_remainingLives <= 0)

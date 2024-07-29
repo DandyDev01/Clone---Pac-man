@@ -223,7 +223,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.47
+  m_Radius: 0.35
 --- !u!114 &8858964792246837861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,12 +237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 600
-  _grid: {fileID: 0}
-  _target: {fileID: 0}
   _marker: {fileID: 4388725208322387734, guid: 777799611428c974f838d1797f44d773, type: 3}
   _chaseState: {fileID: 0}
-  _scatterState: {fileID: 7602747182243338698}
-  _frightenedState: {fileID: 6815635103542255830}
 --- !u!50 &6604440692267237046
 Rigidbody2D:
   serializedVersion: 4

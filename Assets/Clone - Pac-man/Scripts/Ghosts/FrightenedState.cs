@@ -10,7 +10,7 @@ public class FrightenedState : GhostStateBase
 
 	public override GhostStateBase CheckForSwitchState()
 	{
-		throw new System.NotImplementedException();
+		return this;
 	}
 
 	public override void EnterState()

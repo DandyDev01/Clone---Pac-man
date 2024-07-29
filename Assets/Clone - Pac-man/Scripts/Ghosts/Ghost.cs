@@ -8,34 +8,42 @@ using UnityEngine;
 public class Ghost : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private SampleGridXY _grid;
-	[SerializeField] private Transform _target;
 	[SerializeField] private GameObject _marker;
 
 	[Header("States")]
 	[SerializeField] private GhostStateBase _chaseState;
-	[SerializeField] private ScatterState _scatterState;
-	[SerializeField] private FrightenedState _frightenedState;
+	private ScatterState _scatterState;
+	private FrightenedState _frightenedState;
 
+	private Transform _target;
+    private SampleGridXY _grid;
 	private GhostStateBase _currentState;
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
 
-	public Vector3 ScatterPoint => _scatterState.HomePath.First().position;
 	public GameObject Marker => _marker;
-	public float Speed => _speed;
 	public GhostStateBase CurrentState => _currentState;
+	public GhostStateBase ScatterState => _scatterState;
+	public GhostStateBase FrightenedState => _frightenedState;
+	public GhostStateBase ChaseState => _chaseState;
+	public Vector3 ScatterPoint => _scatterState.HomePath.First().position;
+	public float Speed => _speed;
 
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_animator = GetComponentInChildren<Animator>();
 
+		_grid = FindObjectOfType<SampleGridXY>();
+		_target = GameObject.FindGameObjectWithTag("Player").transform;
+		_frightenedState = GetComponentInChildren<FrightenedState>();
+		_scatterState = GetComponentInChildren<ScatterState>();
+
 		_chaseState.Init(_grid, this);
 		_scatterState.Init(_grid, this);
 		_frightenedState.Init(_grid, this);	
 
-		_currentState = _chaseState;
+		_currentState = _scatterState;
 
 	}
 
@@ -51,10 +59,15 @@ public class Ghost : MonoBehaviour
 
 		if (nextState != _currentState)
 		{
-			_currentState.ExitState();
-			_currentState = nextState;
-			_currentState.EnterState();
+			SwitchState(nextState);
 		}
+	}
+
+	public void SwitchState(GhostStateBase newState)
+	{
+		_currentState.ExitState();
+		_currentState = newState;
+		_currentState.EnterState();
 	}
 
 	public void Move(Vector3 targetPosition)
