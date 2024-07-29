@@ -22,13 +22,21 @@ public class DeadState : GhostStateBase
 
 	public override GhostStateBase CheckForSwitchState()
 	{
-		if (_index >= _path.Count && _timer.IsPlaying == false)
+		if (_index >= _path.Count-1 && _timer.IsPlaying == false)
+		{
+			_ghost.SetSpeedModifier(0);
 			_timer.Play();
+		}
 
 		if (_timer.Finished)
+		{
+			_ghost.SetSpeedModifier(1);
 			return _ghost.ChaseState;
-		else 
+		}
+		else
+		{
 			return this;
+		}
 	}
 
 	public override void EnterState()
@@ -52,6 +60,6 @@ public class DeadState : GhostStateBase
 
 	protected override Vector3 ChooseTargetLocation()
 	{
-		return _ghost.transform.position;
+		return _ghost.transform.position + (Vector3)Vector2.up;
 	}
 }
