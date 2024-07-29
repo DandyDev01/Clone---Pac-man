@@ -59,6 +59,9 @@ public class Player : MonoBehaviour
 	{
 		if (collision.transform.tag == "Ghost")
 		{
+			if (collision.GetComponent<Ghost>().CurrentState is FrightenedState)
+				return; 
+
 			HasBeenHit = true;
 			OnDealth?.Invoke();
 			SwitchState(DeadState);

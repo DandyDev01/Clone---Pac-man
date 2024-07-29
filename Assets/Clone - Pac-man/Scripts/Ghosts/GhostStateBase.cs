@@ -101,7 +101,7 @@ public abstract class GhostStateBase : MonoBehaviour
 
 	private void ChooseAnimation()
 	{
-		if (this is FrightenedState)
+		if (this is DeadState || this is FrightenedState)
 			return;
 
 		Vector2 direction = _ghost.CalculateMoveDirection();
