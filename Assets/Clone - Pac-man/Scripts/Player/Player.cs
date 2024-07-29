@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 		_currentState.EnterState();
 	}
 
-	private void Update()
+	public void RunCurrentState()
 	{
 		PlayerStateBase nextState = _currentState.RunState();
 

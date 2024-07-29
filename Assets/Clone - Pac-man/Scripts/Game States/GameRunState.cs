@@ -18,6 +18,8 @@ public class GameRunState : GameStateBase
 
 	public override GameStateBase RunState()
 	{
+		_gameController.Player.RunCurrentState();
+
 		return CheckForStateSwitch();
 	}
 
