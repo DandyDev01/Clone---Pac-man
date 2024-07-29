@@ -10,7 +10,12 @@ public class FrightenedState : GhostStateBase
 
 	public override GhostStateBase CheckForSwitchState()
 	{
-		return this;
+		// if player catches, enter dead state
+		float distance = Vector3.Distance(_playerTransform.position, transform.position);
+		if (distance < 0.5f)
+			return _ghost.DeadState;
+		else
+			return this;
 	}
 
 	public override void EnterState()

@@ -14,6 +14,7 @@ public class Ghost : MonoBehaviour
 	[SerializeField] private GhostStateBase _chaseState;
 	private ScatterState _scatterState;
 	private FrightenedState _frightenedState;
+	private DeadState _deadState;
 
 	private Transform _target;
     private SampleGridXY _grid;
@@ -26,6 +27,7 @@ public class Ghost : MonoBehaviour
 	public GhostStateBase ScatterState => _scatterState;
 	public GhostStateBase FrightenedState => _frightenedState;
 	public GhostStateBase ChaseState => _chaseState;
+	public GhostStateBase DeadState => _deadState;
 	public Vector3 ScatterPoint => _scatterState.HomePath.First().position;
 	public float Speed => _speed;
 
@@ -38,6 +40,7 @@ public class Ghost : MonoBehaviour
 		_target = GameObject.FindGameObjectWithTag("Player").transform;
 		_frightenedState = GetComponentInChildren<FrightenedState>();
 		_scatterState = GetComponentInChildren<ScatterState>();
+		_deadState = GetComponentInChildren<DeadState>();
 
 		_chaseState.Init(_grid, this);
 		_scatterState.Init(_grid, this);
