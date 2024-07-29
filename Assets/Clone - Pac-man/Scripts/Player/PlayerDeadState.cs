@@ -46,6 +46,7 @@ public class PlayerDeadState : PlayerStateBase
 	public override void ExitState()
 	{
 		_player.GetComponent<Collider2D>().enabled = true;
+		_player.HasBeenHit = false;
 	}
 
 	public override PlayerStateBase RunState()

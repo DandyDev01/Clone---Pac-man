@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d823481cf610de54ca1415b61a978b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ghostHouse: {fileID: 0}
 --- !u!1 &6977696888676288744
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90afcd8be6b595643829e271e013365a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 600
+  _speed: 800
   _marker: {fileID: 4388725208322387734, guid: 777799611428c974f838d1797f44d773, type: 3}
   _chaseState: {fileID: 0}
 --- !u!50 &6604440692267237046

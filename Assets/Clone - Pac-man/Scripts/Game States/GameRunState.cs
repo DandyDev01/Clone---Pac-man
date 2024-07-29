@@ -33,7 +33,6 @@ public class GameRunState : GameStateBase
 		}
 		else if (_gameController.Player.HasBeenHit)
 		{
-			_gameController.Player.HasBeenHit = false;
 			return _gameController.GameResetState;
 		}
 		else

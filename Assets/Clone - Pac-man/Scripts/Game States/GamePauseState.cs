@@ -11,11 +11,13 @@ public class GamePauseState : GameStateBase
 	public override void EnterStart()
 	{
 		_gameController.PauseView.gameObject.SetActive(true);
+		Time.timeScale = 0;
 	}
 
 	public override void ExitStart()
 	{
 		_gameController.PauseView.gameObject.SetActive(false);
+		Time.timeScale = 1;
 	}
 
 	public override GameStateBase RunState()
