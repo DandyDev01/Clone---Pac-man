@@ -10,18 +10,13 @@ public class Timer
 
 	public event Action OnTimerEnd;
 	public event Action<float> OnTick;
-
-	public Timer(float coutDownTime)
-	{
-		RemainingTime = coutDownTime;
-	}
-
+	
 	public Timer(bool playOnStart)
 	{
 		isPlaying = playOnStart;
 	}
 
-	public Timer(float countDownTimer, bool playOnStart)
+	public Timer(float countDownTimer, bool playOnStart = true)
 	{
 		RemainingTime = countDownTimer;
 		isPlaying = playOnStart;

@@ -1,4 +1,6 @@
 using Grid;
+using PlasticGui;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,8 +47,12 @@ public class PlayerDeadState : PlayerStateBase
 
 	public override void ExitState()
 	{
+		_player.StartCoroutine(ResetCoroutine());
+
 		_player.GetComponent<Collider2D>().enabled = true;
 		_player.HasBeenHit = false;
+		_player.IsInvincible = true;
+
 		_index = 0;
 	}
 
@@ -55,5 +61,12 @@ public class PlayerDeadState : PlayerStateBase
 		_player.transform.position = Vector3.MoveTowards(_player.transform.position, _currentTarget._worldPosition, (_player.Speed / 50) * Time.deltaTime);
 
 		return CheckForSwitchState();
+	}
+
+	private IEnumerator ResetCoroutine()
+	{
+		yield return new WaitForSeconds(5f);
+		_player.IsInvincible = false;
+
 	}
 }

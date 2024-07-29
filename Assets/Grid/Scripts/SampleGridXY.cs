@@ -107,7 +107,7 @@ namespace Grid
 				}
 
 				// exit condition, path to goal is found.
-				if (current._worldPosition.Approx((Vector3)target))
+				if (Vector3.Distance(current._worldPosition, target) < 0.1f)
 				{
 					goalFound = true;
 					break;
@@ -133,9 +133,10 @@ namespace Grid
 				}
 
 				index += 1;
+				// could not find a path
 				if (index >= nodes.Count)
 				{
-					Debug.Log("issue");
+					Debug.Log("Issue. Cannot get to target: " + target);
 					EditorApplication.isPaused = true;
 					return new List<Node>();
 				}

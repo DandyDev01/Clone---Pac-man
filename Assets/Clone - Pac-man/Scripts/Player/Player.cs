@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 	public PlayerStateBase IdleState { get; private set; }
 	public PlayerStateBase MoveState { get; private set; }
 	public PlayerStateBase DeadState { get; private set; }
+	public bool IsInvincible { get; set; }
 	public Vector3 Spawn => _spawn.position;
 	public float Speed => _speed;
 	public bool HasBeenHit { get; set; }
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.transform.tag == "Ghost")
+		if (collision.transform.tag == "Ghost" && IsInvincible == false)
 		{
 			GhostStateBase state = collision.GetComponent<Ghost>().CurrentState;
 			if (state is FrightenedState || state is DeadState)

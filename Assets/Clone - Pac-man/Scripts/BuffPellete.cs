@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BuffPellete : Collectable
 {
-	private Timer _timer = new Timer(10f);
+	private Timer _timer = new Timer(10f, false);
 	private Player _player;
 	private GhostCordinator _ghostCordinator;
 	private CircleCollider2D _circleCollider;

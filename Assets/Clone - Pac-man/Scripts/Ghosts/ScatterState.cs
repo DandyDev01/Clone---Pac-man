@@ -15,7 +15,7 @@ public class ScatterState : GhostStateBase
 
 	private void Awake()
 	{
-		_timer = new Timer(10f);
+		_timer = new Timer(10f, false);
 	}
 
 	private void Update()

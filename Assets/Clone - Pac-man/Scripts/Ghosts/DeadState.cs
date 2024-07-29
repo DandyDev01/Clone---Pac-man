@@ -12,7 +12,7 @@ public class DeadState : GhostStateBase
 
 	private void Awake()
 	{
-		_timer = new Timer(10f);
+		_timer = new Timer(10f, false);
 	}
 
 	private void Update()
@@ -52,6 +52,6 @@ public class DeadState : GhostStateBase
 
 	protected override Vector3 ChooseTargetLocation()
 	{
-		throw new System.Exception("Target location error");
+		return _ghost.transform.position;
 	}
 }

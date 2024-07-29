@@ -22,7 +22,7 @@ public class GhostCordinator : MonoBehaviour
 		_orangeGhost.enabled = false;
 		_pinkGhost.enabled = false;
 
-		_redReleaseTimer = new Timer(0f);
+		_redReleaseTimer = new Timer(0f, false);
 		_blueReleaseTimer = new Timer(1005f);
 		_orangeReleaseTimer = new Timer(1000f);
 		_pinkReleaseTimer = new Timer(1005f);
