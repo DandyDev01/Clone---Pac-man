@@ -36,10 +36,12 @@ public class PlayerDeadState : PlayerStateBase
 		_path = _player.Grid.CalculatePath(_player.Spawn, _player.transform.position);
 		_currentTarget = _path.First();
 		_player.PlayAnimation("Dead");
+		_player.GetComponent<Collider2D>().enabled = false;
 	}
 
 	public override void ExitState()
 	{
+		_player.GetComponent<Collider2D>().enabled = true;
 	}
 
 	public override PlayerStateBase RunState()

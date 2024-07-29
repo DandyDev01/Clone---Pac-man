@@ -24,12 +24,10 @@ public class PlayerMoveState : PlayerStateBase
 	public override void EnterState()
 	{
 		_player.PlayAnimation("Move");
-		Debug.Log("Enter Player Move");
 	}
 
 	public override void ExitState()
 	{
-		Debug.Log("Exit Player Move");
 	}
 
 	public override PlayerStateBase RunState()

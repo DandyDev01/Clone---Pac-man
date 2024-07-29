@@ -15,6 +15,7 @@ public class FrightenedState : GhostStateBase
 
 	public override void EnterState()
 	{
+		_ghost.PlayAnimation("Frightened");
 	}
 
 	public override void ExitState()

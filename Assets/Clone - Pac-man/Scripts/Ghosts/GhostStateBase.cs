@@ -13,6 +13,7 @@ public abstract class GhostStateBase : MonoBehaviour
 	protected Ghost _ghost;
 	protected Node _currentTarget;
 	protected int _index = 0;
+	private Vector2 _currentDirection = Vector2.zero;
 
 	private List<GameObject> _markers = new();
 
@@ -111,6 +112,8 @@ public abstract class GhostStateBase : MonoBehaviour
 				return this;
 			}
 
+			ChooseAnimation();
+
 			_currentTarget = _path[_index];
 		}
 
@@ -130,4 +133,25 @@ public abstract class GhostStateBase : MonoBehaviour
 
     public abstract GhostStateBase CheckForSwitchState();
 
+	private void ChooseAnimation()
+	{
+		Vector2 direction = _ghost.CalculateMoveDirection();
+
+		if (direction == Vector2.up)
+		{
+			_ghost.PlayAnimation("Move_Up");
+		}
+		else if (direction == Vector2.down)
+		{
+			_ghost.PlayAnimation("Move_Down");
+		}
+		else if (direction == Vector2.right)
+		{
+			_ghost.PlayAnimation("Move_Right");
+		}
+		else if (direction == Vector2.left)
+		{
+			_ghost.PlayAnimation("Move_Left");
+		}
+	}
 }

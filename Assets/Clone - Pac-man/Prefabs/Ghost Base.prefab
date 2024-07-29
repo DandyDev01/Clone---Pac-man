@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5569429896897158619}
   - component: {fileID: 7167203066237284601}
+  - component: {fileID: 3764928154332052775}
   m_Layer: 0
   m_Name: SpriteRenderer
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3764928154332052775
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977696888676288744}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8071914404184103031
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b3b445670e4214b8e8410b350b76cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pathUpdateTriggers: []
 --- !u!1 &8395160150641824906
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90afcd8be6b595643829e271e013365a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 600
   _grid: {fileID: 0}
   _target: {fileID: 0}
   _marker: {fileID: 4388725208322387734, guid: 777799611428c974f838d1797f44d773, type: 3}
@@ -246,7 +269,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &8886096838312991704
 GameObject:
   m_ObjectHideFlags: 0

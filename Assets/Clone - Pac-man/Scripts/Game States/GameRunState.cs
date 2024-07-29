@@ -10,18 +10,14 @@ public class GameRunState : GameStateBase
 
 	public override void EnterStart()
 	{
-		Debug.Log("Enter Run State");
 	}
 
 	public override void ExitStart()
 	{
-		Debug.Log("Exit Run State");
 	}
 
 	public override GameStateBase RunState()
 	{
-		//_gameController.Player.Move(_gameController.Input.currentActionMap.actions[0].ReadValue<Vector2>());
-
 		return CheckForStateSwitch();
 	}
 
