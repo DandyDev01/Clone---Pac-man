@@ -48,7 +48,7 @@ public class Ghost : MonoBehaviour
 		_frightenedState.Init(_grid, this);	
 		_deadState.Init(_grid, this);
 
-		_currentState = _scatterState;
+		_currentState = _chaseState;
 	}
 
 	private void Start()
