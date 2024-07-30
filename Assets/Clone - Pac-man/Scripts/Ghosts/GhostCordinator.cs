@@ -18,9 +18,9 @@ public class GhostCordinator : MonoBehaviour
 
 	private void Awake()
 	{
-		_blueGhost.enabled = false;
-		_orangeGhost.enabled = false;
-		_pinkGhost.enabled = false;
+		_blueGhost.SetSpeedModifier(0f);
+		_orangeGhost.SetSpeedModifier(0f);
+		_pinkGhost.SetSpeedModifier(0f);
 
 		_redReleaseTimer = new Timer(0f, false);
 		_blueReleaseTimer = new Timer(500f);
@@ -78,21 +78,21 @@ public class GhostCordinator : MonoBehaviour
 
 	public void EnableRed()
 	{
-		_redGhost.enabled = true;
+		_redGhost.SetSpeedModifier(1);
 	}
 
 	public void EnableBlue()
 	{
-		_blueGhost.enabled = true;
+		_blueGhost.SetSpeedModifier(1);
 	}
 
 	public void EnableOrange()
 	{
-		_orangeGhost.enabled = true;
+		_orangeGhost.SetSpeedModifier(1);
 	}
 
 	public void EnablePink()
 	{
-		_pinkGhost.enabled = true;
+		_pinkGhost.SetSpeedModifier(1);
 	}
 }

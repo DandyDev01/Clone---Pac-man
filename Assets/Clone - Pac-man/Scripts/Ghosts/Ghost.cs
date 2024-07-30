@@ -43,16 +43,16 @@ public class Ghost : MonoBehaviour
 		_scatterState = GetComponentInChildren<ScatterState>();
 		_deadState = GetComponentInChildren<DeadState>();
 
-		_chaseState.Init(_grid, this);
-		_scatterState.Init(_grid, this);
-		_frightenedState.Init(_grid, this);	
-		_deadState.Init(_grid, this);
-
 		_currentState = _chaseState;
 	}
 
 	private void Start()
 	{
+		_chaseState.Init(_grid, this);
+		_scatterState.Init(_grid, this);
+		_frightenedState.Init(_grid, this);
+		_deadState.Init(_grid, this);
+
 		_currentState.EnterState();
 	}
 
