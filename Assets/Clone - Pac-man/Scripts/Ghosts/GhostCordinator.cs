@@ -45,13 +45,19 @@ public class GhostCordinator : MonoBehaviour
 		_pinkReleaseTimer.Tick(Time.deltaTime);
 	}
 
-
 	public void FrightenedMode()
 	{
-		_redGhost.SwitchState(_redGhost.FrightenedState);
-		_blueGhost.SwitchState(_blueGhost.FrightenedState);
-		_orangeGhost.SwitchState(_orangeGhost.FrightenedState);
-		_pinkGhost.SwitchState(_pinkGhost.FrightenedState);
+		if (_redGhost.CurrentState is not DeadState)
+			_redGhost.SwitchState(_redGhost.FrightenedState);
+
+		if (_blueGhost.CurrentState is not DeadState)
+			_blueGhost.SwitchState(_blueGhost.FrightenedState);
+
+		if (_orangeGhost.CurrentState is not DeadState)
+			_orangeGhost.SwitchState(_orangeGhost.FrightenedState);
+
+		if (_pinkGhost.CurrentState is not DeadState)
+			_pinkGhost.SwitchState(_pinkGhost.FrightenedState);
 	}
 
 	public void ScatterMode()
