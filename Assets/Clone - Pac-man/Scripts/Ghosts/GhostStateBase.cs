@@ -7,6 +7,7 @@ using UnityEngine;
 
 public abstract class GhostStateBase : MonoBehaviour
 {
+	protected PathBuilder _pathBuilder;
 	protected List<Node> _path;
 	protected Transform _playerTransform;
 	protected SampleGridXY _grid;
@@ -29,6 +30,7 @@ public abstract class GhostStateBase : MonoBehaviour
 		_ghost = ghost;
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 		_path = new List<Node>();
+		_pathBuilder = new PathBuilder(_grid.Grid, _grid.Marker);
 	}
 
 	/// <summary>
@@ -36,7 +38,7 @@ public abstract class GhostStateBase : MonoBehaviour
 	/// </summary>
 	public void UpdatePath()
 	{
-		List<Node> newPath = _grid.CalculatePath(ChooseTargetLocation(), _ghost.transform.position);
+		List<Node> newPath = _pathBuilder.CalculatePath(ChooseTargetLocation(), _ghost.transform.position);
 
 		// if new path contains any elements that are a part of the current path look again
 		// get direction

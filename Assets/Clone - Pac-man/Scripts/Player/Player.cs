@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 	private SpriteRenderer _spriteRenderer;
 	private Rigidbody2D _rigidbody;
 	private PlayerStateBase _currentState;
+	private PathBuilder _pathBuilder;
 	private float _speedModifier = 1f;
 
 	public PlayerInput Input { get; private set; }
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
 	public PlayerStateBase IdleState { get; private set; }
 	public PlayerStateBase MoveState { get; private set; }
 	public PlayerStateBase DeadState { get; private set; }
+	public PathBuilder PathBuilder => _pathBuilder;
 	public bool IsInvincible { get; set; }
 	public Vector3 Spawn => _spawn.position;
 	public float Speed => _speed;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
 		Input = GetComponent<PlayerInput>();
 		_spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
 		_grid = FindObjectOfType<SampleGridXY>();
+		_pathBuilder = new PathBuilder(_grid.Grid, _grid.Marker);
 
 		IdleState = new PlayerIdleState(this);
 		MoveState = new PlayerMoveState(this);

@@ -33,7 +33,7 @@ public class ScatterState : GhostStateBase
 
 	public override void EnterState()
 	{
-		List<Node> pathToHome = _grid.CalculatePath(_homePath.First().position, _ghost.transform.position);
+		List<Node> pathToHome = _pathBuilder.CalculatePath(_homePath.First().position, _ghost.transform.position);
 
 		_path.Clear();
 		_path.AddRange(pathToHome);
