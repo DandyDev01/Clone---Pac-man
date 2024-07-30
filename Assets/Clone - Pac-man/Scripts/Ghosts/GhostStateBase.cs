@@ -36,7 +36,10 @@ public abstract class GhostStateBase : MonoBehaviour
 	/// </summary>
 	public void UpdatePath()
 	{
-		List<Node> newPath = _grid.CalculatePath(ChooseTargetLocation(), _ghost.transform.position);
+		List<Node> newPath = _grid.CalculatePath(ChooseTargetLocation(), _ghost.transform.position, _ghost.CalculateMoveDirection());
+
+		// if new path contains any elements that are a part of the current path look again
+		// get direction
 
 		if (newPath.Count > 0)
 		{

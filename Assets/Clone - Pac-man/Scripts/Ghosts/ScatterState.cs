@@ -33,7 +33,7 @@ public class ScatterState : GhostStateBase
 
 	public override void EnterState()
 	{
-		List<Node> pathToHome = _grid.CalculatePath(_homePath.First().position, _ghost.transform.position);
+		List<Node> pathToHome = _grid.CalculatePath(_homePath.First().position, _ghost.transform.position, _ghost.CalculateMoveDirection());
 
 		_path.Clear();
 		_path.AddRange(pathToHome);
@@ -41,8 +41,6 @@ public class ScatterState : GhostStateBase
 		_timer.Play();
 
 		_index = 0;
-
-		_ghost.SetSpeedModifier(2f);
 
 		_currentTarget = _path.First();
 
@@ -53,8 +51,6 @@ public class ScatterState : GhostStateBase
 	{
 		_timer.Stop();
 		_timer.Reset(10f);
-
-		_ghost.SetSpeedModifier(1f);
 
 		OnTargetReached -= SetPathToHomeRoute;
 	}

@@ -78,7 +78,7 @@ namespace Grid
 		/// <param name="target">Where the goal is.</param>
 		/// <param name="start">Where the starting localtion is (initial state.)</param>
 		/// <returns>A path from the start location to target location</returns>
-		public List<Node> CalculatePath(Vector2 target, Vector2 start)
+		public List<Node> CalculatePath(Vector2 target, Vector2 start, Vector2 direction)
 		{
 			DeletePathMarkers();
 
@@ -90,7 +90,7 @@ namespace Grid
 			target = grid.GetCellPosition(target);
 			target = grid.GetWorldPosition((int)target.x, (int)target.y);
 
-			Node root = CreateRoot(start);
+			Node root = CreateRoot(start, direction);
 			List<Node> nodes = new();
 			bool goalFound = false;
 
@@ -195,7 +195,7 @@ namespace Grid
 		/// </summary>
 		/// <param name="start">Location of the root node.</param>
 		/// <returns>The root node.</returns>
-		private Node CreateRoot(Vector2 start)
+		private Node CreateRoot(Vector2 start, Vector2 direction)
 		{
 			Vector3[] neighborsWorldPosition = grid.GetNeighboursWorldPositions(start).ToArray();
 
@@ -205,7 +205,7 @@ namespace Grid
 			{
 				Vector3 cell = grid.GetCellPosition(neightbor);
 				bool value = grid.GetElement((int)cell.x, (int)cell.y);
-				if (value)
+				if (value && neightbor != (Vector3)(start + (direction * -1)))
 					traversable.Add(neightbor);
 				
 			}
