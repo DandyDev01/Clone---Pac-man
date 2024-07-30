@@ -62,18 +62,32 @@ public class GhostCordinator : MonoBehaviour
 
 	public void ScatterMode()
 	{
-		_redGhost.SwitchState(_redGhost.ScatterState);
-		_blueGhost.SwitchState(_blueGhost.ScatterState);
-		_orangeGhost.SwitchState(_orangeGhost.ScatterState);
-		_pinkGhost.SwitchState(_pinkGhost.ScatterState);
+		if (_redGhost.CurrentState is not DeadState)
+			_redGhost.SwitchState(_redGhost.ScatterState);
+
+		if (_blueGhost.CurrentState is not DeadState)
+			_blueGhost.SwitchState(_blueGhost.ScatterState);
+
+		if (_orangeGhost.CurrentState is not DeadState)
+			_orangeGhost.SwitchState(_orangeGhost.ScatterState);
+
+		if (_pinkGhost.CurrentState is not DeadState)
+			_pinkGhost.SwitchState(_pinkGhost.ScatterState);
 	}
 
 	public void ChaseMode()
 	{
-		_redGhost.SwitchState(_redGhost.ChaseState);
-		_blueGhost.SwitchState(_blueGhost.ChaseState);
-		_orangeGhost.SwitchState(_orangeGhost.ChaseState);
-		_pinkGhost.SwitchState(_pinkGhost.ChaseState);
+		if (_redGhost.CurrentState is not DeadState)
+			_redGhost.SwitchState(_redGhost.ChaseState);
+
+		if (_blueGhost.CurrentState is not DeadState)
+			_blueGhost.SwitchState(_blueGhost.ChaseState);
+
+		if (_orangeGhost.CurrentState is not DeadState)
+			_orangeGhost.SwitchState(_orangeGhost.ChaseState);
+
+		if (_pinkGhost.CurrentState is not DeadState)
+			_pinkGhost.SwitchState(_pinkGhost.ChaseState);
 	}
 
 	public void EnableRed()
