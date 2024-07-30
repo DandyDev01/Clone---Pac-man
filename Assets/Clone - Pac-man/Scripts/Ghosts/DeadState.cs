@@ -41,7 +41,7 @@ public class DeadState : GhostStateBase
 
 	public override void EnterState()
 	{
-		List<Node> pathToGhostHouse = _grid.CalculatePath(_ghostHouse.position, _ghost.transform.position, _ghost.CalculateMoveDirection());
+		List<Node> pathToGhostHouse = _grid.CalculatePath(_ghostHouse.position, _ghost.transform.position);
 
 		_path.AddRange(pathToGhostHouse);
 

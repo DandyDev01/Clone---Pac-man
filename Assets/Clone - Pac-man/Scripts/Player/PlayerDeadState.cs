@@ -35,7 +35,7 @@ public class PlayerDeadState : PlayerStateBase
 
 	public override void EnterState()
 	{
-		_path = _player.Grid.CalculatePath(_player.Spawn, _player.transform.position, _player.transform.position);
+		_path = _player.Grid.CalculatePath(_player.Spawn, _player.transform.position);
 		_player.PlayAnimation("Dead");
 		_player.GetComponent<Collider2D>().enabled = false;
 

@@ -43,6 +43,9 @@ public class BuffPellete : Collectable
 		_timer.Reset(10);
 
 		_player.SetSpeedModifier(1f);
+
+		GhostCordinator ghostCordinator = FindObjectOfType<GhostCordinator>();
+		ghostCordinator.ChaseMode();
 	}
 
 	public void Enable()
