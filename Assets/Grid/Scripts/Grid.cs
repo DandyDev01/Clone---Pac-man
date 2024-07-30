@@ -56,6 +56,18 @@ namespace Grid
 		}
 
 		/// <summary>
+		/// Determines if the target world position maps to a cell position
+		/// </summary>
+		/// <param name="col">Column to check</param>
+		/// <param name="row">Row to Check</param>
+		/// <returns>true is the target position is inside the grid</returns>
+		public bool IsInRange(int col, int row)
+		{
+			return col >= 0 && col < columns && row >= 0
+				&& row < rows;
+		}
+
+		/// <summary>
 		/// Get the world position of a neighbouring cell via its world position
 		/// </summary>
 		/// <param name="worldPosition">world position of the cell whose neighbour you want</param>
@@ -188,33 +200,6 @@ namespace Grid
 		}
 
 		/// <summary>
-		/// Get the elements that are a neighbour of a cell
-		/// </summary>
-		/// <param name="col">col of cell whose neighbours you want</param>
-		/// <param name="row">row of cell whose neighbours you want</param>
-		/// <returns>IEnumerable containing neighbouring elements</returns>
-		public IEnumerable<TGridObject> GetNeighbours(int col, int row)
-		{
-			Vector3[] neighbours = { new Vector2(0,1), new Vector2(1,1), 
-				new Vector2(1,0), new Vector2(1,-1), new Vector2(0,-1), 
-				new Vector2(-1,-1), new Vector2(-1,0), new Vector2(-1,1) };
-			
-			List<TGridObject> results = new List<TGridObject>();
-
-			foreach (var item in neighbours)
-			{
-				int _col = (int)item.x + col;
-				int _row = (int)item.y + row;
-
-				if (_col < 0 || _col >= columns || _row < 0 || _row >= rows) continue;
-
-				results.Add(Cells[_col, _row]);
-			}
-
-			return results;
-		}
-
-		/// <summary>
 		/// Get the element at a specified cell
 		/// </summary>
 		/// <param name="col">col of cell wanted</param>
@@ -223,6 +208,12 @@ namespace Grid
 		public TGridObject GetElement(int col, int row)
 		{
 			return Cells[col, row];
+		}
+
+		public TGridObject GetElement(Vector3 worldPosition)
+		{
+			Vector3 cell = GetCellPosition(worldPosition);
+			return GetElement((int)cell.x, (int)cell.y);
 		}
 
 		/// <summary>

@@ -9,8 +9,7 @@ public class Ghost : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-	[Header("States")]
-	[SerializeField] private GhostStateBase _chaseState;
+	private GhostStateBase _chaseState;
 	private ScatterState _scatterState;
 	private FrightenedState _frightenedState;
 	private DeadState _deadState;
@@ -28,7 +27,9 @@ public class Ghost : MonoBehaviour
 	public GhostStateBase ChaseState => _chaseState;
 	public GhostStateBase DeadState => _deadState;
 	public Vector3 ScatterPoint => _scatterState.HomePath.First().position;
+	public Transform PlayerTransform => _playerTransform;
 	public float Speed => _speed;
+	public float SpeedModifier => _speedModifier;
 	public PathUpdateTrigger LastUpdateTrigger { get; set; }
 	public PathUpdateTrigger CurrentUpdateTrigger { get; set; }
 
@@ -39,6 +40,7 @@ public class Ghost : MonoBehaviour
 
 		_grid = FindObjectOfType<SampleGridXY>();
 		_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+		_chaseState = transform.GetChild(1).GetComponent<GhostStateBase>();
 		_frightenedState = GetComponentInChildren<FrightenedState>();
 		_scatterState = GetComponentInChildren<ScatterState>();
 		_deadState = GetComponentInChildren<DeadState>();
