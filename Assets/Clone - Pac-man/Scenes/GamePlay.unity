@@ -17006,8 +17006,8 @@ MonoBehaviour:
   _pauseView: {fileID: 868524163}
   _gameOverView: {fileID: 972342350}
   _winView: {fileID: 1719864824}
-  _fruitPrefab: {fileID: 0}
-  _fruitSpawn: {fileID: 0}
+  _fruitPrefab: {fileID: 5621306926925343347, guid: c860caa0094e4e646a7ce489c087cbae, type: 3}
+  _fruitSpawn: {fileID: 549354554}
 --- !u!4 &2071791392
 Transform:
   m_ObjectHideFlags: 0
