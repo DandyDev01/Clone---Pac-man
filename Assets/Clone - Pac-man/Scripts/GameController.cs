@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private PauseMenuView _gameOverView;
     [SerializeField] private PauseMenuView _winView;
 
+	[SerializeField] private Fruit _fruitPrefab;
+	[SerializeField] private Transform _fruitSpawn;
+
     private Player _player;
     private Transform _spawn;
 	private PelletGenerator _pelletGenerator;
@@ -21,7 +24,8 @@ public class GameController : MonoBehaviour
 	private const int _maxLives = 3;
     private int _remainingLives = 3;
     private int _score;
-	
+	private int _eatenPellets = 0;
+
 	public PlayerInput Input { get; private set; }
 	public GameStateBase CurrentState { get; private set; }
 	public GameStateBase GameRunState { get; private set; }
@@ -118,6 +122,17 @@ public class GameController : MonoBehaviour
 	{
 		_score += amount;
 		_gameView.UpdateScore(_score);
+
+		if (amount == 1)
+		{
+			_eatenPellets += 1;
+		}
+
+		if (_eatenPellets == 70 || _eatenPellets == 170)
+			Instantiate(_fruitPrefab, _fruitSpawn.position, Quaternion.identity);
+
+		if (_eatenPellets == 170)
+			_eatenPellets = 0;
 	}
 
 	internal void SwitchState(GameStateBase newState)

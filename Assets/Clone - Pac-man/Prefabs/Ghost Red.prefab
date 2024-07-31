@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858964792246837861, guid: 16d27c3080dbde443b1677474a299f5e, type: 3}
       propertyPath: _speed
-      value: 800
+      value: 950
       objectReference: {fileID: 0}
     - target: {fileID: 8858964792246837861, guid: 16d27c3080dbde443b1677474a299f5e, type: 3}
       propertyPath: _chaseState

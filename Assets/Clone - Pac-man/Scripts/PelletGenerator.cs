@@ -15,6 +15,8 @@ public class PelletGenerator : MonoBehaviour
 	private List<Pellet> _activePellets;
 	private List<Pellet> _inactivePellets;
 
+	public int InactivePellets => _activePellets.Count;
+
 	public Action OnAllPelletPickedup;
 
 	private void Awake()
