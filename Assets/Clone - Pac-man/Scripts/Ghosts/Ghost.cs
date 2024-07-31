@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class Ghost : MonoBehaviour
+public class Ghost : Collectable
 {
     [SerializeField] private float _speed;
 
@@ -128,5 +128,14 @@ public class Ghost : MonoBehaviour
 		}
 
 		return Vector2.zero;
+	}
+
+	protected override void Collect(Collider2D collision)
+	{
+		if (_currentState != FrightenedState)
+			return;
+
+		var player = _playerTransform.GetComponent<Player>();
+		player.Pickup(100);
 	}
 }
