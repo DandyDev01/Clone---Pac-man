@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class PlayerDeadState : PlayerStateBase
 {
-	private List<Node> _path;
+	private List<Node> _path = new();
 	private Node _currentTarget;
 	private int _index = 0;
 
@@ -36,6 +36,7 @@ public class PlayerDeadState : PlayerStateBase
 	public override void EnterState()
 	{
 		_path = _player.PathBuilder.CalculatePath(_player.Spawn, _player.transform.position);
+		//_currentTarget = new Node(_player.Spawn);
 		_player.PlayAnimation("Dead");
 		_player.GetComponent<Collider2D>().enabled = false;
 

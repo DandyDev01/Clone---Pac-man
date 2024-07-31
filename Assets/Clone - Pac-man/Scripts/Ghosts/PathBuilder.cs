@@ -1,4 +1,5 @@
 using Grid;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ public class PathBuilder
 			// node is not within the bounds of the search space.
 			if (_grid.IsInRange(current._worldPosition) == false)
 			{
-				continue;
+				throw new Exception("Out of range");
 			}
 
 			// exit condition, path to goal is found.
@@ -81,9 +82,17 @@ public class PathBuilder
 			// could not find a path
 			if (index >= nodes.Count)
 			{
+				// check for path again but with higher exit tolerance
+				foreach (Node node in nodes)
+				{
+					if (Vector3.Distance(node._worldPosition, target) < 2)
+					{
+						current = node;
+						break;
+					}
+				}
+
 				Debug.Log("Issue. Cannot get to target: " + target);
-				EditorApplication.isPaused = true;
-				return new List<Node>();
 			}
 
 			current = nodes[index];

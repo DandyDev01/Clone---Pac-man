@@ -19,7 +19,6 @@ public class BlueGhostChaseState : GhostStateBase
 
 	public override void ExitState()
 	{
-		//StopCoroutine(PathUpdater());
 	}
 
 	protected override Vector3 ChooseTargetLocation()
@@ -40,6 +39,11 @@ public class BlueGhostChaseState : GhostStateBase
 
 		if (_grid.Grid.IsInRange(target) == false)
 			target = _playerTransform.position;
+
+		if (_grid.Grid.GetElement(target) == false)
+		{
+			target = _playerTransform.position;
+		}
 
 		return target;
 	}

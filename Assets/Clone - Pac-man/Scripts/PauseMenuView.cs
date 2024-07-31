@@ -14,7 +14,7 @@ public class PauseMenuView : MonoBehaviour
 	private void Awake()
 	{
 		_resumeButton.onClick.AddListener(Resume);
-		_mainMenuButton.onClick.AddListener(MainMenu);
+		_mainMenuButton.onClick.AddListener(MainMenu);	
 	}
 
 	private void MainMenu()

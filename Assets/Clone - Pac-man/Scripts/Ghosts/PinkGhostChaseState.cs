@@ -17,7 +17,6 @@ public class PinkGhostChaseState : GhostStateBase
 
 	public override void ExitState()
 	{
-		//_ghost.StopCoroutine(PathUpdater());
 	}
 
 	protected override Vector3 ChooseTargetLocation()
@@ -30,6 +29,11 @@ public class PinkGhostChaseState : GhostStateBase
 
 		if (_grid.Grid.IsInRange(target) == false)
 			return _playerTransform.position;
+
+		if (_grid.Grid.GetElement(target) == false)
+		{
+			return _playerTransform.position;
+		}
 
 		return target;
 	}

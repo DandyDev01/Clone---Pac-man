@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
 		Input = GetComponent<PlayerInput>();
 		_spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
 		_grid = FindObjectOfType<SampleGridXY>();
-		_pathBuilder = new PathBuilder(_grid.Grid, _grid.Marker);
 
 		IdleState = new PlayerIdleState(this);
 		MoveState = new PlayerMoveState(this);
@@ -48,6 +47,11 @@ public class Player : MonoBehaviour
 
 		_currentState = IdleState;
 		_currentState.EnterState();
+	}
+
+	private void Start()
+	{
+		_pathBuilder = new PathBuilder(_grid.Grid, _grid.Marker);
 	}
 
 	public void RunCurrentState()
@@ -116,7 +120,7 @@ public class Player : MonoBehaviour
 		OnPickup?.Invoke(amount);
 	}
 
-	internal void SwitchState(PlayerStateBase newState)
+	public void SwitchState(PlayerStateBase newState)
 	{
 		_currentState.ExitState();
 		_currentState = newState;
