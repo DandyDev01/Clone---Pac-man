@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 	private Rigidbody2D _rigidbody;
 	private PlayerStateBase _currentState;
 	private PathBuilder _pathBuilder;
+	private Vector2 _currentDirection;
 	private float _speedModifier = 1f;
 
 	public PlayerInput Input { get; private set; }
@@ -42,15 +43,17 @@ public class Player : MonoBehaviour
 		_grid = FindObjectOfType<SampleGridXY>();
 
 		IdleState = new PlayerIdleState(this);
-		MoveState = new PlayerMoveState(this);
 		DeadState = new PlayerDeadState(this);
 
 		_currentState = IdleState;
 		_currentState.EnterState();
+
+		_currentDirection = Vector2.zero;
 	}
 
 	private void Start()
 	{
+		MoveState = new PlayerMoveState(this, _grid.Grid);
 		_pathBuilder = new PathBuilder(_grid.Grid, _grid.Marker);
 	}
 
@@ -84,8 +87,25 @@ public class Player : MonoBehaviour
 	/// <param name="direction">Direction to move the player.</param>
 	public void Move(Vector2 direction)
     {
+		// makes it so player is always moving after input is registered.
+		if (direction == Vector2.zero) 
+			return;
+
+		if (direction != _currentDirection)
+		{
+			CenterToCell(direction);
+			_currentDirection = direction;
+		}
+
         _rigidbody.velocity = Time.deltaTime * _speed * _speedModifier * direction;
     }
+
+	private void CenterToCell(Vector2 direction)
+	{
+		Vector3 target = _grid.Grid.GetCellPosition(transform.position);
+		target = _grid.Grid.GetWorldPosition((int)target.x, (int)target.y);
+		transform.position = target;
+	}
 
 	/// <summary>
 	/// Set the z rotation of the player.
