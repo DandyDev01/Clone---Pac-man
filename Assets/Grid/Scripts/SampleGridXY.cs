@@ -75,33 +75,6 @@ namespace Grid
 
 	}
 
-	public class Node
-	{
-		public readonly List<Node> _children = new();
-		public readonly Vector3 _worldPosition;
-		public Node _parent;
-
-		public Node(Vector3 item)
-		{
-			_worldPosition = item;
-		}
-
-		public Node(Vector3 item, Node parent)
-		{
-			_worldPosition = item;
-			_parent = parent;
-		}
-
-		public Node(Vector2 start, Vector3[] traverableNeighbors)
-		{
-			_worldPosition = start;
-			foreach (var item in traverableNeighbors)
-			{
-				_children.Add(new Node(item));
-			};
-		}
-	}
-
 	public static class Extensions
 	{
 
